@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "com.example.taegyungsi.dao.UserDao">
+<mapper namespace = "com.example.backend.dao.UserDao">
 
     <!--id(기본키)로 유저 찾기-->
     <select id = "findById"
@@ -80,8 +80,7 @@
     <update id = "updateUser"
             parameterType = "int">
         UPDATE TB_USER_JWT
-        SET PASSWORD
-          , EMAIL
+        SET EMAIL
           , ADDRESS
           , PHONE
           , UPDATE_TIME = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')

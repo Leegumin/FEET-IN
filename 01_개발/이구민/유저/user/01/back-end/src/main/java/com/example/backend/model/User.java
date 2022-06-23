@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * packageName : com.example.taegyungsi.model
+ * packageName : com.example.backend.model
  * fileName : User
  * author : gumin
  * date : 2022-06-17

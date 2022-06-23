@@ -4,7 +4,7 @@ import com.example.backend.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * packageName : com.example.taegyungsi.dao
+ * packageName : com.example.backend.dao
  * fileName : UserDao
  * author : gumin
  * date : 2022-06-17

@@ -1,0 +1,19 @@
+1. blulid.gradle 의존성 추가
+
+// 보안설정 모듈 추가
+	implementation 'org.springframework.boot:spring-boot-starter-security:2.6.7'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	implementation "javax.xml.bind:jaxb-api"
+
+2. application.properties에 아래 내용 추가
+
+# Todo: JWT 인증
+spring.jwt.secret = pepega524832857240
+
+3. model : JWTResponse, MessageResponse, User
+4. dao : UserDao
+5. mappers : User
+6. service : CustomUserDetailService
+7. security : JWTTokenProvider, JWTAuthenticatioFilter
+8. configuration : SecurityConfig
+9. controller : WebConfig, SignController

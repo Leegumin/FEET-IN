@@ -3,7 +3,7 @@ package com.example.backend.model;
 import lombok.Data;
 
 /**
- * packageName : com.example.taegyungsi.model
+ * packageName : com.example.backend.model
  * fileName : MessageResponse
  * author : gumin
  * date : 2022-06-17
