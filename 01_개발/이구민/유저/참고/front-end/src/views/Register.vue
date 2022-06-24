@@ -26,14 +26,15 @@
                    class = "form-control"
                    name = "username"
             >
+            <!--submit 버튼을 누르고 && 유효성에러가 발생했을 경우 아래 내용이 출력-->
+            <div
+                v-if = "errors.has('username') && submitted"
+                class = "alert-danger"
+            >
+              {{ errors.first('username') }}
+            </div>
           </div>
-          <!--submit 버튼을 누르고 && 유효성에러가 발생했을 경우 아래 내용이 출력-->
-          <div
-              v-if = "errors.has('username') && submitted"
-              class = "alert-danger"
-          >
-            {{ errors.first('username') }}
-          </div>
+
 
           <!--이메일 입력 양식 #1 시작-->
           <div class = "form-group">
@@ -44,14 +45,15 @@
                    class = "form-control"
                    name = "email"
             >
+            <!--submit 버튼을 누르고 && 유효성에러가 발생했을 경우 아래 내용이 출력-->
+            <div
+                v-if = "errors.has('email') && submitted"
+                class = "alert-danger"
+            >
+              {{ errors.first('email') }}
+            </div>
           </div>
-          <!--submit 버튼을 누르고 && 유효성에러가 발생했을 경우 아래 내용이 출력-->
-          <div
-              v-if = "errors.has('email') && submitted"
-              class = "alert-danger"
-          >
-            {{ errors.first('email') }}
-          </div>
+
           <!--이메일 입력 양식 #1 끝-->
 
           <!--패스워드 입력양식 #1 시작-->
@@ -63,15 +65,16 @@
                    class = "form-control"
                    name = "password"
             >
-          </div>
-          <!--submit 버튼을 누르고 && 유효성에러가 발생했을 경우 아래 내용이 출력-->
-          <div
-              v-if = "errors.has('password') && submitted"
-              class = "alert-danger"
-          >
-            {{ errors.first('password') }}
+            <!--submit 버튼을 누르고 && 유효성에러가 발생했을 경우 아래 내용이 출력-->
+            <div
+                v-if = "errors.has('password') && submitted"
+                class = "alert-danger"
+            >
+              {{ errors.first('password') }}
+            </div>
           </div>
           <!--패스워드 입력양식 #1 끝-->
+
           <!--가입 버튼 #1 시작-->
           <div class = "form-group">
             <button class = "btn btn-primary btn-block">Sign Up</button>
@@ -137,7 +140,7 @@ export default {
                   data => {
                     this.message = data.message
                     this.successful = true
-                    // 강제 페이지 전환 : login
+                    //  강제 페이지 전환 : login
                     // this.$router.push("/login")
                   },
                   // 실패

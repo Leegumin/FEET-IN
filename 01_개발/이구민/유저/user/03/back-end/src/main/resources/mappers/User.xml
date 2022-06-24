@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.example.backend.dao.UserDao">
+
+    <!--id(기본키)로 유저 찾기-->
+    <select id = "findById"
+            parameterType = "String"
+            resultType = "User">
+        SELECT ID
+             , USERNAME
+             , PASSWORD
+             , NAME
+             , BIRTH
+             , EMAIL
+             , ADDRESS
+             , PHONE
+             , ROLES
+             , DELETE_YN
+             , INSERT_TIME
+        FROM TB_USER_JWT
+        WHERE ID = #{id}
+          AND DELETE_YN = 'N'
+    </select>
+
+    <!--username(실질적인 ID)으로 유저 찾기-->
+    <select id = "findByUserName"
+            parameterType = "String"
+            resultType = "User">
+        SELECT ID
+             , USERNAME
+             , PASSWORD
+             , NAME
+             , BIRTH
+             , EMAIL
+             , ADDRESS
+             , PHONE
+             , ROLES
+             , DELETE_YN
+             , INSERT_TIME
+        FROM TB_USER_JWT
+        WHERE USERNAME = #{username}
+          AND DELETE_YN = 'N'
+    </select>
+
+    <!--회원정보 추가-->
+    <insert id = "insertUser"
+            parameterType = "User">
+        INSERT INTO TB_USER_JWT( ID
+                               , USERNAME
+                               , PASSWORD
+                               , NAME
+                               , BIRTH
+                               , EMAIL
+                               , ADDRESS
+                               , PHONE
+                               , ROLES
+                               , INSERT_TIME)
+        VALUES ( SQ_USER.NEXTVAL
+               , #{username}
+               , #{password}
+               , #{name}
+               , #{birth}
+               , #{email}
+               , #{address}
+               , #{phone}
+               , #{roles}
+               , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'))
+    </insert>
+
+    <!--회원 탈퇴-->
+    <update id = "deleteUser"
+            parameterType = "String">
+        UPDATE TB_USER_JWT
+        SET DELETE_YN   = 'Y'
+          , DELETE_TIME = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+        WHERE ID = #{id}
+    </update>
+
+    <!--회원 수정-->
+    <update id = "updateUser"
+            parameterType = "User">
+        UPDATE TB_USER_JWT
+        SET EMAIL = #{email}
+          , PASSWORD = #{password}
+          , ADDRESS = #{address}
+          , PHONE = #{phone}
+          , UPDATE_TIME = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+        WHERE ID = #{id}
+    </update>
+
+</mapper>
