@@ -1,0 +1,42 @@
+@import '~mdb-ui-kit/css/mdb.min.css';
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    background-color: #028DFF;
+    /*!* fallback for old browsers *!*/
+    /*background: #6a11cb!important;*/
+    /*!* Chrome 10-25, Safari 5.1-6 *!*/
+    /*background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1)) !important;*/
+    /*!* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+    /*background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))!important;*/
+}
+
+.login-title {
+    font-size: 40px;
+    color: white;
+    font-family: 'Kanit', sans-serif!important;
+}
+
+.login-card {
+    border: none!important;
+    border-radius: 20px;
+    box-shadow: 5px 5px 30px rgba(54, 54, 63, 0.45);
+}
+
+.login-btn:hover {
+    color: #36363f!important;
+    background-color: white!important;
+}
+
+input {
+    background-color: white!important;
+}
+
+.form-label {
+    color: #36363f!important;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+

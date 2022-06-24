@@ -1,0 +1,224 @@
+<template>
+  <section class="bg-white">
+    <div class="container mypage-container">
+      <div class="row">
+        <div class="col-lg-12 mb-4 mb-sm-5 profile-wrap">
+          <div class="card card-style1 border-0 profile-card">
+            <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+              <div class="row align-items-center">
+                <div class="col-lg-3 mb-4 mb-lg-0 profile-icon">
+                  <i class="fa-solid fa-user-large mx-2 fa-8x"></i>
+                </div>
+                <div class="col-lg-9 px-xl-10 profile-content">
+                  <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                    <h3 class="h2 text-white">{name}의 MyPage</h3>
+                    <span class="text-primary">{id}</span>
+                  </div>
+                  <ul class="list-unstyled">
+                    <li class="mb-2 mb-xl-2 display-28"><span class="display-26">Phone: </span>{phone}</li>
+                    <li class="mb-2 mb-xl-2 display-28"><span class="display-26">Email: </span>{email}</li>
+                    <li class="mb-2 mb-xl-2 display-28"><span class="display-26">Address: </span>{address}</li>
+                  </ul>
+                  <div class="text-center"><a class="btn profile-edit-btn" href="#">
+                    Edit</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- * cart -->
+        <div class="col-lg-12 mb-4 mb-sm-5 cart-container">
+          <div>
+            <span class="section-title mb-3 mb-sm-4 sub-title">Shopping Cart</span>
+            <table class="table mt-3 cart-table">
+              <thead>
+              <tr>
+                <th scope="col">상품정보</th>
+                <th scope="col">옵션</th>
+                <th scope="col">수량</th>
+                <th scope="col">결제금액</th>
+                <th scope="col">삭제</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <img src="https://via.placeholder.com/100x100" alt="Logo">
+                  {product}
+                </td>
+                <td class="td-center">{ooption}</td>
+                <td class="td-center">{quantity}</td>
+                <td class="td-center">{price}</td>
+                <td class="td-center">{delete}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-center"><a class="buy-btn" href="#">
+            Buy</a>
+          </div>
+        </div>
+        <!-- * wish list -->
+        <div class="col-lg-12 mb-4 mb-sm-5">
+          <div>
+            <span class="section-title mb-3 mb-sm-4 sub-title">Wish List</span>
+            <!-- wish list -->
+            <div class="mt-3 wish-list">
+              <div class="collection-list row gx-4 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-5">
+<!--              <div class="collection-list row gx-4 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-4">-->
+                <div class="col mb-3 fav">
+                  <div class="card h-100">
+                    <div class="badge position-absolute fav-icon" style="top: 0.5rem; right: 0.5rem">
+                      <i class="fa-solid fa-heart fa-3x"></i>
+                    </div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="@/assets/images/product/c1-1.jpeg" alt="..."/>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                      <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="fw-bolder">Fancy Product</h5>
+                        <!-- Product price-->
+                        $40.00 - $80.00
+                      </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center"><a class="btn mt-auto detail-btn" href="#">
+                        상품상세</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col mb-3 fav">
+                  <div class="card h-100">
+                    <div class="badge position-absolute fav-icon" style="top: 0.5rem; right: 0.5rem">
+                      <i class="fa-solid fa-heart fa-3x"></i>
+                    </div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="@/assets/images/product/c1-1.jpeg" alt="..."/>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                      <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="fw-bolder">Fancy Product</h5>
+                        <!-- Product price-->
+                        $40.00 - $80.00
+                      </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center"><a class="btn mt-auto detail-btn" href="#">
+                        상품상세</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col mb-3 best">
+                  <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="@/assets/images/product/s1-1.jpeg" alt="..."/>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                      <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="fw-bolder">Popular Item</h5>
+                        <!-- Product price-->
+                        $40.00
+                      </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center"><a class="btn mt-auto detail-btn" href="#">
+                        상품상세</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col mb-3 best">
+                  <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="@/assets/images/product/s1-1.jpeg" alt="..."/>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                      <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="fw-bolder">Popular Item</h5>
+                        <!-- Product price-->
+                        $40.00
+                      </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center"><a class="btn mt-auto detail-btn" href="#">
+                        상품상세</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col mb-3 best">
+                  <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="@/assets/images/product/s1-1.jpeg" alt="..."/>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                      <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="fw-bolder">Popular Item</h5>
+                        <!-- Product price-->
+                        $40.00
+                      </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center"><a class="btn mt-auto detail-btn" href="#">
+                        상품상세</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col mb-3 best">
+                  <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="@/assets/images/product/s1-1.jpeg" alt="..."/>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                      <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="fw-bolder">Popular Item</h5>
+                        <!-- Product price-->
+                        $40.00
+                      </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center"><a class="btn mt-auto detail-btn" href="#">
+                        상품상세</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+import mypage from '@/assets/js/mypage'
+
+export default {
+  name: "MyPageCom",
+  mounted() {
+    mypage();
+  }
+}
+</script>
+
+<style scoped>
+  @import "@/assets/css/mypage.css";
+</style>
