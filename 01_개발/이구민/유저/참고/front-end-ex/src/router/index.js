@@ -44,7 +44,7 @@ const router = new VueRouter({
   routes,
 })
 
-// 로그인 권한이 없는 사람과 있는 사람을 구별해서 화면을 보여주는 부분 추가
+/*// 로그인 권한이 없는 사람과 있는 사람을 구별해서 화면을 보여주는 부분 추가
 // beforeEach : 메뉴간 서로 이동할 때 중간에 가로채는 이벤트
 // to : 이동할 페이지
 // from : 이동하기 전 페이지
@@ -67,6 +67,6 @@ router.beforeEach((to, from, next) => {
   else {
     next()
   }
-})
+})*/
 
 export default router
