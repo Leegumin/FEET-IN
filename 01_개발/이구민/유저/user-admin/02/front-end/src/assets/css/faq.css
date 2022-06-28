@@ -1,0 +1,38 @@
+.faq-container {
+    width: 1200px;
+}
+
+#faq-title {
+    font-size: 45px;
+    /*font-weight: 700;*/
+    font-family: 'Kanit', sans-serif;
+}
+
+.no {
+    width: 10%;
+}
+
+.th-content {
+    text-align: center;
+}
+
+.td-content {
+    padding-left: 30px!important;
+}
+
+.td-content-detail {
+    padding-left: 50px!important;
+}
+
+.faq-tr-header {
+    background-color: #f0f0f6;
+}
+
+.view {
+    text-decoration: none;
+    color: #36363f;
+}
+
+.view:hover {
+    color: #028DFF;
+}

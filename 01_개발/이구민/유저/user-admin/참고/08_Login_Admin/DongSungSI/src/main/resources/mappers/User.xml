@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.example.dongsungsi.dao.UserDao">
+
+    <select id = "findByUserName"
+            parameterType = "String"
+            resultType = "User">
+        SELECT ID
+             , EMAIL
+             , PASSWORD
+             , USERNAME
+             , ROLE
+             , NAME
+             , BIRTH
+             , ADDRESS
+             , PHONE
+             , DELETE_YN
+             , INSERT_TIME
+             , UPDATE_TIME
+        FROM TB_USER
+        WHERE USERNAME = #{username}
+          AND DELETE_YN = 'N'
+    </select>
+
+    <select id = "existsByUserName"
+            parameterType = "String"
+            resultType = "int">
+        SELECT COUNT(USERNAME)
+        FROM TB_USER
+        WHERE USERNAME = #{username}
+          AND DELETE_YN = 'N'
+
+    </select>
+
+    <select id = "existsByEmail"
+            parameterType = "String"
+            resultType = "int">
+        SELECT COUNT(EMAIL)
+        FROM TB_USER
+        WHERE EMAIL = #{email}
+          AND DELETE_YN = 'N'
+
+    </select>
+
+    <insert id = "insertUser"
+            parameterType = "User">
+        INSERT INTO TB_USER( ID
+                           , EMAIL
+                           , PASSWORD
+                           , USERNAME
+                           , ROLE
+                           , NAME
+                           , ADDRESS
+                           , PHONE
+                           , INSERT_TIME)
+        VALUES ( SQ_USER.NEXTVAL
+               , #{email}
+               , #{password}
+               , #{username}
+               , #{role}
+               , #{name}
+               , #{address}
+               , #{phone}
+               , TO_CHAR(SYSDATE + 9 / 24, 'YYYY-MM-DD HH24:MI:SS'))
+    </insert>
+</mapper>

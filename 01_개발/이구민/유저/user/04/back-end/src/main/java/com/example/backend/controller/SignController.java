@@ -144,7 +144,7 @@ public class SignController {
             return ResponseEntity.ok(new MessageResponse("User updated successfully!"));
         }
         else if (result == -1) {
-            // DB에 유저가 있으므로 있다고 응답을 전송
+            // DB에 유저가 없다고 응답을 전송
             return ResponseEntity.badRequest().body(new MessageResponse("Error: User updated failed!"));
         }
         else {

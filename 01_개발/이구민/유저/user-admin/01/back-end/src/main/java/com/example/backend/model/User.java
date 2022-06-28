@@ -1,75 +1,95 @@
 package com.example.backend.model;
 
-import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * packageName : com.example.backend.model
- * fileName : User
- * author : gumin
- * date : 2022-06-17
- * description : TB_USER_JWT 테이블을 담는 자바 클래스(객체)
- * ===========================================================
- * DATE            AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2022-06-17         gumin          최초 생성
- */
-@Data
-// UserDetails는 내부적으로 Serialize를 상속받음 ( 네트웤 전송 포맷 )
-// 인증 성공된 객체 : User
-public class User implements UserDetails {
+@Setter
+@Getter
+@ToString
+public class User {
 
-    // Serialize 네트웤 전송 자동 생성 번호 => 수동으로 이름을 명시함
-    // 보안관련해서 자동으로 번호를 생성함
-    private static final long serialVersionUID = 1L;
+    //  유저 아이디 넘버
+    private Long id;
 
-    private String id; // 시퀀스 번호, 기본키, 고유식별값
-    private String username; // 실질적인 ID
-    private String password; // 유저 비밀번호
-    private String name; // 이름
-    private String birth; // 생일
-    private String email; // 이메일
-    private String address; // 주소
-    private String phone; // 핸드폰번호
-    private String roles; // 권한 ( ROLE_USER, ROLE_ADMIN )
-    private String deleteYn; // 탈퇴여부
-    private String insertTime; // 가입일자
-    private String updateTime; // 회원정보수정 일자
-    private String deleteTime; // 회원 탈퇴 일자
+    // *User로 들어오는 데이터 유효성 검사돌림
+    // *@NotBlank : 유효성 검사, 공백이 아니어야함
+    // *@Size(max = 50, min = 10) : 유효성 검사, 최대 50자, 최소 10자
+    //  사용자 아이디
+    @NotBlank
+    @Size(max = 20)
+    private String username;
 
-    // 권한 관련된 정보를 얻는 메소드
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // 권한 정보를 담을 배열 정의
-        // GrantedAuthority : 승인된 권한들이 모여있는 곳
-        ArrayList<GrantedAuthority> auth = new ArrayList<>();
-        // 권한 객체를 넣기 : auth 배열
-        auth.add(new SimpleGrantedAuthority(roles));
-        return auth;
-    }
+    //  비밀번호
+    @NotBlank
+    @Size(max = 120)
+    private String password;
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+    // 이름
+    @NotBlank
+    @Size(max = 50)
+    private String name;
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+    // 생일
+    @Size(max = 50)
+    private String birth;
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+    //  이메일
+    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
 
-    @Override
-    public boolean isEnabled() {
-        return true;
+    // 주소
+    @NotBlank
+    @Size(max = 120)
+    private String address;
+
+    // 핸드폰번호
+    @NotBlank
+    @Size(max = 20)
+    private String phone;
+
+    // 탈퇴여부
+    private String deleteYn;
+
+    // 가입일자
+    private String insertTime;
+
+    // 회원정보수정 일자
+    private String updateTime;
+
+    // 회원 탈퇴 일자
+    private String deleteTime;
+
+    //  todo : role column 추가 할것
+    //  todo : role 변수 추가 할것 테스트
+    //  권한 ( ROLE_USER, ROLE_ADMIN )
+    //  DB 역할 컬럼
+    private String role;
+
+    //  SpringSecuriry 역활
+    //  private Set<Role> roles = new HashSet<>();
+    private Set<String> roles = new HashSet<>();
+
+    public User(String username, String email, String password, String name, String birth, String address, String phone,
+                String deleteYn, String insertTime, String updateTime, String deleteTime) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.birth = birth;
+        this.address = address;
+        this.phone = phone;
+        this.deleteYn = deleteYn;
+        this.insertTime = insertTime;
+        this.updateTime = updateTime;
+        this.deleteTime = deleteTime;
     }
 }

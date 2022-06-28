@@ -1,9 +1,0 @@
-1. http-auth.js 추가
-2. models 경로 추가 -> user.js 추가
-3. services 경로 auth 경로 추가 -> AuthHeader.js, AuthService.js, UserDataService.js 추가
-4. Vuex의 store 경로 index.js 수정
-5. Vuex의 store 경로 AuthoModule.js 추가
-6. main.js 수정
-7. LoginCom, SignUpcom 수정
-8. router -> index.js 수정
-9.NavCom 수정
