@@ -116,17 +116,23 @@ export default {
     },
 
     deleteUser () {
-      AuthService.delete(this.currentUser.id)
-      .then(response => {
-        console.log(response.data)
-        // this.$router.push('/')
-      }).catch(e => {
-        console.log(e)
-      })
+      // confirm 경고창
+      if(confirm("정말 탈퇴 하시겠습니까?")){
+        AuthService.delete(this.currentUser.id)
+        .then(response => {
+          console.log(response.data)
+          // dispatch (호출하는 메소드) : actions에 있는 메소드를 호출
+          this.$store.dispatch('auth/logout')
+          // 메인페이지로 이동
+          this.$router.push('/')
+        }).catch(e => {
+          console.log(e)
+        })
+      }
     },
   },
   mounted () {
-    // this.message = ''
+    this.message = ''
   },
 }
 </script>

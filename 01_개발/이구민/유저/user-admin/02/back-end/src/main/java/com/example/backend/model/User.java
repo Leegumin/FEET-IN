@@ -27,12 +27,12 @@ public class User {
     private String username;
 
     //  비밀번호
-    // @NotBlank
+    @NotBlank
     @Size(max = 120)
     private String password;
 
     // 이름
-    // @NotBlank
+    @NotBlank
     @Size(max = 50)
     private String name;
 
@@ -41,18 +41,18 @@ public class User {
     private String birth;
 
     //  이메일
-    // @NotBlank
+    @NotBlank
     @Size(max = 50)
     @Email
     private String email;
 
     // 주소
-    // @NotBlank
+    @NotBlank
     @Size(max = 120)
     private String address;
 
     // 핸드폰번호
-    // @NotBlank
+    @NotBlank
     @Size(max = 20)
     private String phone;
 

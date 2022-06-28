@@ -179,29 +179,21 @@ public class AuthController {
     }
 
     // 회원가입 수정
-    @PostMapping("/user-update")
+    @PutMapping("/user-update")
     public ResponseEntity<?> updateUser(@Valid
                                           @RequestBody
                                           SignupRequest signUpRequest) {
 
         logger.info("signUpRequest {} ", signUpRequest);
-
-        if (userService.existsByUserName(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
-        }
-
-        if (userService.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
-        }
-
         // Create new user's account
         User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
                              encoder.encode(signUpRequest.getPassword()), signUpRequest.getName(),
                              signUpRequest.getBirth(), signUpRequest.getAddress(), signUpRequest.getPhone(),
                              signUpRequest.getDeleteYn(), signUpRequest.getInsertTime(), signUpRequest.getUpdateTime(),
                              signUpRequest.getDeleteTime());
+        logger.info("user {} ", user);
 
-//    Set<String> strRoles = signUpRequest.getRoles();
+/*//    Set<String> strRoles = signUpRequest.getRoles();
         String strRoles = signUpRequest.getRole();
 //    Set<Role> roles = new HashSet<>();
         Set<String> roles = new HashSet<>();
@@ -225,13 +217,13 @@ public class AuthController {
 //      user 객체 저장
                     user.setRole(adminRole.getName().name());
                     break;
-                /*case "ROLE_MODERATOR":
+                *//*case "ROLE_MODERATOR":
                     Role modRole = roleService.findByName(ERole.ROLE_MODERATOR)
                                               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                     roles.add(modRole.getName().name());
 //      user 객체 저장
                     user.setRole(modRole.getName().name());
-                    break;*/
+                    break;*//*
                 default:
                     Role userRole = roleService.findByName(ERole.ROLE_USER)
                                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -240,9 +232,8 @@ public class AuthController {
                     user.setRole(userRole.getName().name());
             }
 //      });
-        }
+        }*/
 
-        user.setRoles(roles);
         userService.updateUser(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

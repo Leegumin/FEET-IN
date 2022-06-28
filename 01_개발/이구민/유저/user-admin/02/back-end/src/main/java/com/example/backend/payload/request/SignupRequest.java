@@ -14,7 +14,8 @@ import java.util.Set;
 @ToString
 // *스프링에서 요청이 온 데이터 유효성 검사돌림
 public class SignupRequest {
-
+// *@NotBlank 쓸라믄 null 값으로 들어오는거 단 하나도 없어야함 안그러면 회원정보수정에서 뻑남
+    
     //  사용자 아이디
     // @NotBlank
     @Size(max = 20)

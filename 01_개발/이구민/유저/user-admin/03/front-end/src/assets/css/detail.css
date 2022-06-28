@@ -1,0 +1,59 @@
+.detail-container {
+    /*background-color: red!important;*/
+    margin-top: 10px!important;
+}
+
+#inputQuantity {
+    border-radius: 25px;
+    border: 1px solid #36363f;
+}
+
+#inputQuantity:focus {
+    border: 1px solid #028DFF;
+}
+
+.add-btn {
+    padding: 10px 20px 10px 20px;
+    border-radius: 25px;
+    background-color: #36363f;
+    color: white;
+}
+
+.add-btn:hover {
+    background-color: #028DFF;
+    border: 1px solid #028DFF;
+}
+
+.add-btn:active{
+    background-color: #028DFF;
+    border: 1px solid #028DFF;
+}
+
+#cart-icon {
+    color: white;
+}
+
+.detail-btn {
+    font-size: 15px;
+    color: white;
+    background-color: #36363f;
+    border: 1px solid #36363f;
+    border-radius: 30px;
+    padding: 10px 20px;
+}
+
+.detail-btn:hover {
+    background-color: #028DFF;
+    border: 1px solid #028DFF;
+    color: white;
+}
+
+.detail-btn:active {
+    background-color: #028DFF;
+    border: 1px solid #028DFF;
+    color: white;
+}
+
+#small-pic {
+    margin-top: 4px;
+}

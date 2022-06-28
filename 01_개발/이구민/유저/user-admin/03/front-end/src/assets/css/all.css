@@ -1,0 +1,9 @@
+.all-container {
+    height: 100vh;
+    margin-bottom: 10vh;
+}
+
+#all-title {
+    font-size: 45px;
+    font-family: 'Kanit', sans-serif;
+}

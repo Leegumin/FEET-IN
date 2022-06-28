@@ -1,0 +1,86 @@
+/*@import '~mdb-ui-kit/css/mdb.min.css';*/
+
+html, body {
+    font-family: 'Noto Sans KR', sans-serif;
+    height: 100%;
+
+    /*!* fallback for old browsers *!*/
+    /*background: #6a11cb!important;*/
+    /*!* Chrome 10-25, Safari 5.1-6 *!*/
+    /*background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1)) !important;*/
+    /*!* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+    /*background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))!important;*/
+}
+
+.login-container {
+    background-color: #1f1f23;
+    padding-top: 50px;
+    height: 900px;
+
+}
+
+.login-title {
+    color: #36363f!important;
+    font-size: 45px;
+    color: white;
+    font-family: 'Kanit', sans-serif!important;
+}
+
+.login-card {
+    background-color: white !important;
+    border: none!important;
+    border-radius: 25px;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.49);
+}
+
+.login-card p {
+    color: #36363f!important;
+}
+
+.login-card a {
+    color: #36363f!important;
+}
+
+.signup-link a {
+    color: #028DFF!important;
+    text-decoration: none;
+}
+
+.login-btn {
+    height: 50px;
+    border-radius: 100px!important;
+    background-color: #36363f;
+    border: 1px solid #36363f;
+}
+
+.login-btn:hover {
+    color: white!important;
+    background-color: #028DFF!important;
+    border: 1px solid #028DFF;
+}
+
+.login-btn:focus {
+    background-color: #028DFF!important;
+    border: 1px solid #028DFF;
+}
+
+.form-outline input {
+    color: #36363f!important;
+    border-radius: 10px!important;
+    border: 1px solid #36363f!important;
+    background-color: white!important;
+}
+
+input:focus, input:active, button:focus, button:active {
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+.form-label {
+    color: #36363f!important;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+.form-outline input {
+    font-size: 15px;
+}

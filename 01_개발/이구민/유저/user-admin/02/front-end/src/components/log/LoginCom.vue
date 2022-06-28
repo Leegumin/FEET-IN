@@ -109,13 +109,13 @@
                     <div class="form-group">
                       <button class="btn btn-outline-light btn-lg px-5 login-btn"
                               :disabled="loading"
-                      ><span v-show="loading"
-                             class="spinner-border spinner-border-sm border-dark"
+                      ><span v-if="loading"
+                             class="spinner-border spinner-border-sm border-dark text-center"
                       ></span>
-                        <span>Login</span>
+                        <span v-else>Login</span>
                       </button>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-3">
                       <div v-if="message"
                            class="alert alert-danger"
                            role="alert"
@@ -136,7 +136,7 @@
                     </div>
                   </div>
                   <div class="signup-link">
-                    <p class="mb-0">Don't have an account? <a href="#!"
+                    <p class="mb-0">Don't have an account? <a href="/signup"
                                                               class="text-white-50 fw-bold"
                     >Sign
                       Up</a>
@@ -206,9 +206,10 @@ export default {
                   // 실패
                   error => {
                     this.loading = false
-                    this.message = (error.response && error.response.data && error.response.data.message) ||
+                    this.message = ("아이디 혹은 비밀번호가 일치하지 않습니다.")
+                    /*this.message = (error.response && error.response.data && error.response.data.message) ||
                         error.message ||
-                        error.toString()
+                        error.toString()*/
                   })
         }
       })
