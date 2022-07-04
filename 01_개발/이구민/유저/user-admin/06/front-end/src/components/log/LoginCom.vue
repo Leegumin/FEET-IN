@@ -1,29 +1,31 @@
 <template>
-  <div class="login-container">
-    <section class="gradient-custom login-form vh-100 vw-100" style="min-height: 800px">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div class="card bg-dark text-white login-card"
-                 style="border-radius: 1rem;"
+  <div class = "login-container">
+    <section class = "gradient-custom login-form vh-100 vw-100"
+             style = "min-height: 800px"
+    >
+      <div class = "container py-5 h-100">
+        <div class = "row d-flex justify-content-center align-items-center h-100">
+          <div class = "col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class = "card bg-dark text-white login-card"
+                 style = "border-radius: 1rem;"
             >
-              <form name="form"
-                    @submit.prevent="handleLogin"
+              <form name = "form"
+                    @submit.prevent = "handleLogin"
               >
-                <div class="card-body p-5 text-center">
-                  <div class="mb-md-5 mt-md-4 pb-5">
-                    <h2 class="fw-bold mb-2 login-title">LOGIN</h2>
-                    <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                <div class = "card-body p-5 text-center">
+                  <div class = "mb-md-5 mt-md-4 pb-5">
+                    <h2 class = "fw-bold mb-2 login-title">LOGIN</h2>
+                    <p class = "text-white-50 mb-5">Please enter your login and password!</p>
 
                     <!-- * ID -->
-                    <div class="form-outline form-white mb-4 form-floating">
-                      <input type="text"
-                             id="floatingInputId"
-                             class="form-control form-control-lg"
-                             v-model="user.username"
-                             v-validate="'required'"
-                             name="username"
-                             placeholder="ID"
+                    <div class = "form-outline form-white mb-4 form-floating">
+                      <input type = "text"
+                             id = "floatingInputId"
+                             class = "form-control form-control-lg"
+                             v-model = "user.username"
+                             v-validate = "'required'"
+                             name = "username"
+                             placeholder = "ID"
                       />
                       <label v-if = "!(errors.has('username') && submitted)"
                              class = "form-label"
@@ -32,30 +34,30 @@
 
                       <!--submit 버튼을 누르고 && 유효성에러가 발생했을 경우 아래 내용이 출력-->
                       <label v-else
-                             class="alert-white text-danger"
-                             for="floatingInputId"
-                             role="alert"
+                             class = "alert-white text-danger"
+                             for = "floatingInputId"
+                             role = "alert"
                       >ID가 필요합니다!</label>
                     </div>
 
                     <!-- * password -->
-                    <div class="form-outline form-white mb-4 form-floating">
-                      <input type="password"
-                             id="floatingInputPassword"
-                             class="form-control form-control-lg"
-                             v-model="user.password"
-                             v-validate="'required'"
-                             name="password"
-                             placeholder="Password"
+                    <div class = "form-outline form-white mb-4 form-floating">
+                      <input type = "password"
+                             id = "floatingInputPassword"
+                             class = "form-control form-control-lg"
+                             v-model = "user.password"
+                             v-validate = "'required'"
+                             name = "password"
+                             placeholder = "Password"
                       />
                       <label v-if = "!(errors.has('username') && submitted)"
                              class = "form-label"
                              for = "floatingInputPassword"
                       >Password</label>
                       <label v-else
-                             class="alert-white text-danger"
-                             for="floatingInputPassword"
-                             role="alert"
+                             class = "alert-white text-danger"
+                             for = "floatingInputPassword"
+                             role = "alert"
                       >Password가 필요합니다!</label>
                       <!--error.has('username') : 유저네임을 입력 안해서 참값이 되면 오류 노출-->
                       <!--                      <div v-if="errors.has('password')"-->
@@ -66,48 +68,47 @@
                       <!--                      </div>-->
                     </div>
 
-                    <p class="small mb-5 pb-lg-2"><a class="text-white-50"
-                                                     href="#!"
+                    <p class = "small mb-5 pb-lg-2"><a class = "text-white-50"
+                                                       href = "#!"
                     >Forgot password?</a></p>
 
-                    <div class="form-group">
-                      <button class="btn btn-outline-light btn-lg px-5 login-btn"
-                              :disabled="loading"
-                      ><span v-if="loading"
-                             class="spinner-border spinner-border-sm border-dark text-center"
+                    <div class = "form-group">
+                      <button class = "btn btn-outline-light btn-lg px-5 login-btn"
+                              :disabled = "loading"
+                      ><span v-if = "loading"
+                             class = "spinner-border spinner-border-sm border-dark text-center"
                       ></span>
                         <span v-else>Login</span>
                       </button>
                     </div>
-                    <div class="form-group mt-3">
-                      <div v-if="message"
-                           class="alert alert-danger"
-                           role="alert"
+                    <div class = "form-group mt-3">
+                      <div v-if = "message"
+                           class = "alert alert-danger"
+                           role = "alert"
                       >
                         {{ message }}
                       </div>
                     </div>
-                    <div class="d-flex justify-content-center text-center mt-4 pt-1 login-icon">
-                      <a href="#!"
-                         class="text-white"
-                      ><i class="fab fa-facebook-f fa-lg"></i></a>
-                      <a href="#!"
-                         class="text-white"
-                      ><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                      <a href="#!"
-                         class="text-white"
-                      ><i class="fab fa-google fa-lg"></i></a>
-                      <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&response_type=code&client_id=606989133043-cgpf72m7ckknbtortvei3qt2v1dsfl2q.apps.googleusercontent.com&redirect_uri=http://localhost:8080/accounts/google/login/callback">
-                        test
+                    <div class = "d-flex justify-content-center text-center mt-4 pt-1 login-icon">
+                      <a href = "#!"
+                         class = "text-white"
+                      ><i class = "fab fa-facebook-f fa-lg"></i></a>
+                      <a href = "#!"
+                         class = "text-white"
+                      ><i class = "fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                      <a href = "#!"
+                         class = "text-white"
+                      ><i class = "fab fa-google fa-lg"
+                      ></i>
                       </a>
-
+                      <button type="button" id="buttonDiv" class="bg-black" @click="handleGLogin"></button>
                     </div>
                   </div>
-                  <div class="signup-link">
-                    <p class="mb-0">Don't have an account? <a href="/signup"
-                                                              class="text-white-50 fw-bold"
+                  <div class = "signup-link">
+                    <p class = "mb-0">Don't have an account? <a href = "/signup"
+                                                                class = "text-white-50 fw-bold"
                     >Sign
-                      Up</a>
+                     Up</a>
                     </p>
                   </div>
                 </div>
@@ -129,26 +130,67 @@ import User from '@/models/user'
 
 export default {
   name: 'LoginCom',
-  data() {
+  data () {
     return {
-      params: {
-        client_id: process.env.Vue_APP_GOOGLE_CLIENT_ID
+      params   : {
+        client_id: process.env.Vue_APP_GOOGLE_CLIENT_ID,
       },
-      user: new User('', ''),
-      loading: false,
-      message: '',
-      submitted: false
+      user     : new User('', ''),
+      loading  : false,
+      message  : '',
+      submitted: false,
     }
   },
   computed: {
     // loggedIn = false or true
-    loggedIn() {
+    loggedIn () {
       return this.$store.state.auth.status.loggedIn
     },
   },
-  methods: {
+  methods : {
+    // 구글 로그인
+    handleGLogin () {
+      // *토큰 발행
+      google.accounts.id.initialize({
+        client_id: '606989133043-poolfd9d8r47uese2trc89l6vsq7on23.apps.googleusercontent.com',
+        callback : this.handleCredentialResponse,
+      })
+      // *구글버튼 디자인
+      google.accounts.id.renderButton(
+          document.getElementById('buttonDiv'),
+          {
+            theme: 'outline',
+            size : 'large',
+          },
+      )
+      // *구글로그인 오픈
+      google.accounts.id.prompt()
+    },
+
+    // *받아온 토큰 decoding
+    parseJwt (token) {
+      let base64Url = token.split('.')[1];
+      let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+
+      return JSON.parse(jsonPayload);
+    },
+
+    handleCredentialResponse (response) {
+      console.log('Encoded JWT ID token: ' + response.credential)
+      const responsePayload = this.parseJwt(response.credential);
+      console.log("ID: " + responsePayload.sub);
+      console.log('Full Name: ' + responsePayload.name);
+      console.log('Given Name: ' + responsePayload.given_name);
+      console.log('Family Name: ' + responsePayload.family_name);
+      console.log("Image URL: " + responsePayload.picture);
+      console.log("Email: " + responsePayload.email);
+    },
+
     // 로그인 메소드 정의
-    handleLogin() {
+    handleLogin () {
       this.loading = true
       this.submitted = true
       // Vee-Validation npm : 뷰에서 유효성을 체크하는 모듈
@@ -177,12 +219,12 @@ export default {
                     this.$router.push('/')
                   },
                   // 실패
-                  error => {
+                  () => {
                     this.loading = false
-                    this.message = ("아이디 혹은 비밀번호가 일치하지 않습니다.")
+                    this.message = ('아이디 혹은 비밀번호가 일치하지 않습니다.')
                     /*this.message = (error.response && error.response.data && error.response.data.message) ||
-                        error.message ||
-                        error.toString()*/
+                     error.message ||
+                     error.toString()*/
                   })
         }
       })
@@ -190,7 +232,7 @@ export default {
     },
 
   },
-  mounted() {
+  mounted () {
     login()
     // mdb()
     // Input()

@@ -1,0 +1,51 @@
+프론트만 작업
+
+1. public -> index.html
+<!--구글 아이디 로그인 추가-->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
+
+2. components -> log -> LoginCom.vue
+-----------template
+<button type="button" id="buttonDiv" class="bg-black" @click="handleGLogin"></button>
+-----------methods에 추가
+// 구글 로그인
+    handleGLogin () {
+      // *토큰 발행
+      google.accounts.id.initialize({
+        client_id: '606989133043-poolfd9d8r47uese2trc89l6vsq7on23.apps.googleusercontent.com',
+        callback : this.handleCredentialResponse,
+      })
+      // *구글버튼 디자인
+      google.accounts.id.renderButton(
+          document.getElementById('buttonDiv'),
+          {
+            theme: 'outline',
+            size : 'large',
+          },
+      )
+      // *구글로그인 오픈
+      google.accounts.id.prompt()
+    },
+
+    // *받아온 토큰 decryption
+    parseJwt (token) {
+      let base64Url = token.split('.')[1];
+      let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+
+      return JSON.parse(jsonPayload);
+    },
+
+    handleCredentialResponse (response) {
+      console.log('Encoded JWT ID token: ' + response.credential)
+      const responsePayload = this.parseJwt(response.credential);
+      console.log("ID: " + responsePayload.sub);
+      console.log('Full Name: ' + responsePayload.name);
+      console.log('Given Name: ' + responsePayload.given_name);
+      console.log('Family Name: ' + responsePayload.family_name);
+      console.log("Image URL: " + responsePayload.picture);
+      console.log("Email: " + responsePayload.email);
+    },
