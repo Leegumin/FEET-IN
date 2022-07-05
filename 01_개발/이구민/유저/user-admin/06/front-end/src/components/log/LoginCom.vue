@@ -101,7 +101,8 @@
                       ><i class = "fab fa-google fa-lg"
                       ></i>
                       </a>
-                      <button type="button" id="buttonDiv" class="bg-black" @click="handleGLogin"></button>
+                      <div id = "buttonDiv"
+                      ></div>
                     </div>
                   </div>
                   <div class = "signup-link">
@@ -132,13 +133,14 @@ export default {
   name: 'LoginCom',
   data () {
     return {
-      params   : {
+      params         : {
         client_id: process.env.Vue_APP_GOOGLE_CLIENT_ID,
       },
-      user     : new User('', ''),
-      loading  : false,
-      message  : '',
-      submitted: false,
+      user           : new User('', ''),
+      loading        : false,
+      message        : '',
+      submitted      : false,
+      responsePayload: null,
     }
   },
   computed: {
@@ -159,34 +161,59 @@ export default {
       google.accounts.id.renderButton(
           document.getElementById('buttonDiv'),
           {
+            type : 'icon',
+            size : 'medium',
             theme: 'outline',
-            size : 'large',
           },
       )
-      // *구글로그인 오픈
-      google.accounts.id.prompt()
+      // *OneTop 기능과 연관됨
+      // google.accounts.id.prompt()
     },
 
     // *받아온 토큰 decoding
     parseJwt (token) {
-      let base64Url = token.split('.')[1];
-      let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
+      let base64Url = token.split('.')[1]
+      let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+      let jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      }).join(''))
 
-      return JSON.parse(jsonPayload);
+      return JSON.parse(jsonPayload)
     },
 
     handleCredentialResponse (response) {
       console.log('Encoded JWT ID token: ' + response.credential)
-      const responsePayload = this.parseJwt(response.credential);
-      console.log("ID: " + responsePayload.sub);
-      console.log('Full Name: ' + responsePayload.name);
-      console.log('Given Name: ' + responsePayload.given_name);
-      console.log('Family Name: ' + responsePayload.family_name);
-      console.log("Image URL: " + responsePayload.picture);
-      console.log("Email: " + responsePayload.email);
+      this.responsePayload = this.parseJwt(response.credential)
+      console.log('ID: ' + JSON.stringify(this.responsePayload))
+      console.log('ID: ' + this.responsePayload.sub)
+      console.log('Full Name: ' + this.responsePayload.name)
+      console.log('Given Name: ' + this.responsePayload.given_name)
+      console.log('Family Name: ' + this.responsePayload.family_name)
+      console.log('Image URL: ' + this.responsePayload.picture)
+      console.log('Email: ' + this.responsePayload.email)
+
+      try {
+        this.user.username = this.responsePayload.email
+        this.user.password = null
+        this.$store.dispatch('auth/login', this.user)
+            // 결과가 성공하면 then(첫번째매개변수)
+            // 실패하면 then(두번째매개변수)
+            .then(
+                // 성공
+                () => {
+                  // 로그인 성공시 자동 이동
+                  this.$router.push('/')
+                },
+                // 실패
+                (error) => {
+                  this.message = (error.response && error.response.data && error.response.data.message) ||
+                   error.message ||
+                   error.toString()
+                })
+      }
+      catch (e) {
+        console.log(e)
+      }
     },
 
     // 로그인 메소드 정의
@@ -242,6 +269,7 @@ export default {
       // mypage 페이지로 강제 이동
       this.$router.push('/')
     }
+    this.handleGLogin()
   },
 }
 </script>
