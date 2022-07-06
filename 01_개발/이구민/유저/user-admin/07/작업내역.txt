@@ -1,0 +1,9 @@
+프론트>
+
+백>
+1. bulid.gardle -  
+// 메일인증 관련
+    implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.0' 추가
+
+
+2. FAQ 기능 합침
