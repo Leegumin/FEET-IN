@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.dao.SendEmailDao;
 import com.example.backend.model.*;
 import com.example.backend.payload.request.LoginRequest;
 import com.example.backend.payload.request.SignupRequest;
@@ -8,7 +9,10 @@ import com.example.backend.payload.response.MessageResponse;
 import com.example.backend.security.jwt.JwtUtils;
 import com.example.backend.security.services.UserDetailsImpl;
 import com.example.backend.service.RoleServiceImpl;
+import com.example.backend.service.SendEmailServiceImp;
 import com.example.backend.service.UserServiceImpl;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +25,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -48,6 +55,9 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+
+    @Autowired
+    SendEmailServiceImp sendEmailService;
 
     // 로그인 메소드
     @PostMapping("/signin")
@@ -81,9 +91,9 @@ public class AuthController {
 
         return ResponseEntity.ok(
                 new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getName(),
-                                userDetails.getAddress(), userDetails.getEmail(), role,
-                                userDetails.getPhone(), userDetails.getDeleteYn(), userDetails.getInsertTime(),
-                                userDetails.getUpdateTime(), userDetails.getDeleteTime()));
+                                userDetails.getAddress(), userDetails.getEmail(), role, userDetails.getPhone(),
+                                userDetails.getDeleteYn(), userDetails.getInsertTime(), userDetails.getUpdateTime(),
+                                userDetails.getDeleteTime()));
     }
 
     // 회원가입
@@ -105,8 +115,8 @@ public class AuthController {
         // Create new user's account
         User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
                              encoder.encode(signUpRequest.getPassword()), signUpRequest.getName(),
-                             signUpRequest.getAddress(), signUpRequest.getPhone(),
-                             signUpRequest.getDeleteYn(), signUpRequest.getInsertTime(), signUpRequest.getUpdateTime(),
+                             signUpRequest.getAddress(), signUpRequest.getPhone(), signUpRequest.getDeleteYn(),
+                             signUpRequest.getInsertTime(), signUpRequest.getUpdateTime(),
                              signUpRequest.getDeleteTime());
 
 //    Set<String> strRoles = signUpRequest.getRoles();
@@ -235,7 +245,6 @@ public class AuthController {
     public ResponseEntity<?> updateUser(@Valid
                                         @RequestBody
                                         SignupRequest signUpRequest) {
-
         logger.info("signUpRequest {} ", signUpRequest);
         Optional<User> user = userService.findByUserName(signUpRequest.getUsername());
 
@@ -243,14 +252,12 @@ public class AuthController {
         // user가 존재하지 않을 때
         // *!user.isPresent() => user == null
         if (!user.isPresent()) {
-            return ResponseEntity.badRequest()
-                                 .body(new MessageResponse("Error : User Is Not Exist"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error : User Is Not Exist"));
         }
 
         // 현재 비밀번호가 불일치 할 때
         if (!encoder.matches(signUpRequest.getPassword(), user.get().getPassword())) {
-            return ResponseEntity.badRequest()
-                                 .body(new MessageResponse("Error : Current Password Different!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error : Current Password Different!"));
         }
 
         // 현재 비밀번호가 일치할 때
@@ -273,8 +280,63 @@ public class AuthController {
             return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
         }
         catch (Exception e) {
-            return ResponseEntity.badRequest()
-                                 .body(new MessageResponse("Error : User registered Failure!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error : User registered Failure!"));
+        }
+    }
+
+    // 이메일 인증
+    @PostMapping("/mail")
+    public ResponseEntity<?> sendEmail(
+            @RequestBody
+            SendEmailDto sendEmailDto, HttpServletResponse response) {
+        logger.info("mail이 호출되었습니다.");
+        logger.info("sendEmailDto:{}", sendEmailDto);
+
+        try {
+            User userID = sendEmailService.findID(sendEmailDto.getName(), sendEmailDto.getEmail());
+            logger.info("userID : {}", userID);
+
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out;
+            // SimpleEmail 기본정보 입력
+            SimpleEmail email = new SimpleEmail();
+            email.setHostName("smtp.naver.com");
+            email.setSmtpPort(587);
+            email.setAuthentication("littlegbear", "K1GLJB4ENX3M");
+
+            // 보안연결 SSL, TLS 사용 설정
+            email.setSSLOnConnect(true);
+            email.setStartTLSEnabled(true);
+
+            logger.info("메일 대기중");
+            // 보내는 사람 설정 (SMTP 서비스 로그인 계정 아이디와 동일하게 해야함에 주의!)
+            email.setFrom("littlegbear@naver.com", "littlegbear", "utf-8");
+            // 받는 사람 설정
+            /*email.addTo(userID.get().getEmail(), userID.get().getName(), "utf-8");*/
+            email.addTo("littlegbear@naver.com", userID.getName(), "utf-8");
+            // 제목 설정
+            email.setSubject("테스트입니다.");
+
+            String ePw = sendEmailService.createKey();
+            email.setMsg("안녕하세요" + userID.getName() + "님"
+                         + "\n아래 코드를 회원가입 창으로 돌아가 입력해주세요"
+                         + "\nCODE : " + ePw);
+            // 메일 전송하기
+            try {
+                out = response.getWriter();
+                email.send();
+                out.println("<script>alert('메일을 보냈습니다'); history.back();</script>");
+                return new ResponseEntity<>(ePw, HttpStatus.OK);
+            }
+            catch (IOException e) {
+                logger.error(e.getMessage());
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+        catch (EmailException e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
+
