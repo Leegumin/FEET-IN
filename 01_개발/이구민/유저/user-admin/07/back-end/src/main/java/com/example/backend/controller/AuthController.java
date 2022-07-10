@@ -285,7 +285,7 @@ public class AuthController {
     }
 
     // 이메일 인증
-    @PostMapping("/mail")
+    /*@PostMapping("/mail")
     public ResponseEntity<?> sendEmail(
             @RequestBody
             SendEmailDto sendEmailDto, HttpServletResponse response) {
@@ -312,7 +312,7 @@ public class AuthController {
             // 보내는 사람 설정 (SMTP 서비스 로그인 계정 아이디와 동일하게 해야함에 주의!)
             email.setFrom("littlegbear@naver.com", "littlegbear", "utf-8");
             // 받는 사람 설정
-            /*email.addTo(userID.get().getEmail(), userID.get().getName(), "utf-8");*/
+            *//*email.addTo(userID.get().getEmail(), userID.get().getName(), "utf-8");*//*
             email.addTo("littlegbear@naver.com", userID.getName(), "utf-8");
             // 제목 설정
             email.setSubject("테스트입니다.");
@@ -336,6 +336,46 @@ public class AuthController {
         catch (EmailException e) {
             logger.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }*/
+
+    @PostMapping("/mail")
+    public ResponseEntity<?> sendEmail(
+            @RequestBody
+            SendEmailDto sendEmailDto) {
+        logger.info("mail이 호출되었습니다.");
+
+        SimpleEmail email1 = new SimpleEmail();
+        email1.setHostName("smtp.naver.com");
+        email1.setSmtpPort(587);
+        email1.setAuthentication("littlegbear", "K1GLJB4ENX3M");
+
+        // 보안연결 SSL, TLS 사용 설정
+        email1.setSSLOnConnect(true);
+        email1.setStartTLSEnabled(true);
+
+        try {
+            // 보내는 사람 설정 (SMTP 서비스 로그인 계정 아이디와 동일하게 해야함에 주의!)
+            email1.setFrom("littlegbear@naver.com", "관리자", "utf-8");
+            // 받는 사람 설정
+//            email1.addTo("littlegbear@naver.com", "이름", "utf-8");
+            email1.addTo(sendEmailDto.getEmail(), sendEmailDto.getName(), "utf-8");
+            // 제목 설정
+            email1.setSubject("제목입니다");
+
+            // 랜덤 코드
+            String ePw = sendEmailService.createKey();
+
+            email1.setMsg("안녕하세요" + sendEmailDto.getName() + "님"
+                          + "\n아래 코드를 회원가입 창으로 돌아가 입력해주세요"
+                          + "\nCODE : " + ePw);
+            // 메일 전송하기
+            email1.send();
+            
+            return ResponseEntity.ok(new MessageResponse("Email Send successfully!"));
+        }
+        catch (EmailException e) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error : Email Send Failure!"));
         }
     }
 }
