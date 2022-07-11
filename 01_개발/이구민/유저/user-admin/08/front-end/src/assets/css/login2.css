@@ -1,0 +1,84 @@
+/*@import '~mdb-ui-kit/css/mdb.min.css';*/
+
+html, body {
+    margin: 0;
+    height: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#app {
+    height: 100%;
+ }
+
+.login-container {
+    height: 100%;
+}
+
+.login-title {
+    color: #36363f!important;
+    font-size: 45px;
+    font-family: 'Kanit', sans-serif!important;
+}
+
+.login-card {
+    background-color: #e3e3e8 !important;
+    border: none !important;
+    border-radius: 25px!important;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.04);
+}
+
+.login-card p {
+    color: #36363f !important;
+}
+
+.login-card a {
+    color: #36363f!important;
+}
+
+.signup-link a {
+    color: #028DFF!important;
+    text-decoration: none;
+}
+
+.login-btn {
+    height: 50px;
+    border-radius: 100px!important;
+    background-color: #36363f;
+    border: 1px solid #36363f;
+}
+
+.login-btn:hover {
+    color: white!important;
+    background-color: #028DFF!important;
+    border: 1px solid #028DFF;
+}
+
+.login-btn:focus {
+    background-color: #028DFF!important;
+    border: 1px solid #028DFF;
+}
+
+.form-outline input {
+    color: #36363f!important;
+    border-radius: 15px!important;
+    /*border: 1px solid #36363f!important;*/
+    background-color: white!important;
+}
+
+input:focus, input:active, button:focus, button:active {
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+.form-label {
+    color: #36363f!important;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+.form-outline input {
+    font-size: 15px;
+}
+
+.login-icon i {
+    color: #36363f;
+}

@@ -1,0 +1,8 @@
+프론트>
+
+백>
+1. bulid.gardle -  
+// 메일인증 관련
+    implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.0' 추가
+
+2. 메일인증관련 작업 완료(서버 터져서 테스트가 안됨, 보류)

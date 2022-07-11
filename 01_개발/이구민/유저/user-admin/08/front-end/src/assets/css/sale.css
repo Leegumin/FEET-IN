@@ -1,0 +1,28 @@
+.sale-container {
+    height: 100%;
+    margin-bottom: 10vh;
+    margin-top: 15vh;
+}
+
+.sale-list-container {
+    height: 100% !important;
+}
+
+.sale-title h2 {
+    font-size: 45px;
+    /*font-weight: 700;*/
+    font-family: 'Kanit', sans-serif;
+}
+
+.sale-title h3 {
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.filter-button-group {
+    padding-bottom: 30px;
+}
+
+.img-fluid {
+    height: 250px;
+}
