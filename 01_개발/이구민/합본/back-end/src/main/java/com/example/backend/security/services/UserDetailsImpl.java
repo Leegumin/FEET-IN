@@ -40,24 +40,6 @@ public class UserDetailsImpl implements UserDetails {
 
   private Collection<? extends GrantedAuthority> authorities;
 
-  /*public UserDetailsImpl(Long id, String username, String password, String name, String address, String phone,
-                         String email, String birth, String deleteYn, String insertTime, String updateTime,
-                         String deleteTime, Collection<? extends GrantedAuthority> authorities) {
-    this.id = id;
-    this.username = username;
-    this.password = password;
-    this.name = name;
-    this.address = address;
-    this.phone = phone;
-    this.email = email;
-    this.birth = birth;
-    this.deleteYn = deleteYn;
-    this.insertTime = insertTime;
-    this.updateTime = updateTime;
-    this.deleteTime = deleteTime;
-    this.authorities = authorities;
-  }*/
-
   public static UserDetailsImpl build(User user) {
     List<GrantedAuthority> authorities = user.getRoles().stream()
 //        .map(role -> new SimpleGrantedAuthority(role.getName().name()))

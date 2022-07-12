@@ -74,7 +74,7 @@ public class AuthController {
         //  유저 상세 정보( UserDetails ) 가져오기
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        //  응답 포함 JWT 및 UwerDetails 데이터
+        //  응답 포함 JWT 및 UserDetails 데이터
         List<String> role = userDetails.getAuthorities()
                                        .stream()
                                        .map(item -> item.getAuthority())

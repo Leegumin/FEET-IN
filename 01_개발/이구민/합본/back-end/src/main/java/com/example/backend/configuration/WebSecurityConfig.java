@@ -57,6 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // permitAll() : 권한이 필요 없음
+        // antMatchers : 프론트에서 요청하는 주소
         http
                 .cors()
                 .and()
@@ -69,12 +71,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-//                .antMatchers("/api/auth/**")
-                .antMatchers("/api/**")
+                /*.antMatchers("/api/products")*/
+
+                /*.antMatchers("/api/**")
+                // permitAll() : 권한이 필요 없음
                 .permitAll()
-//      .antMatchers("/api/test/**").permitAll()
-//      .antMatchers("/login", "/home", "/", "/register").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated();*/
+
+                .antMatchers("/admin-page")
+                .access("hasAuthority('ADMIN')")
+                .anyRequest().permitAll();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
