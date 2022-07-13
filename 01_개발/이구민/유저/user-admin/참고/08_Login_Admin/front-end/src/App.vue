@@ -61,8 +61,8 @@
           </li>
           <!-- dropdown #2 끝 -->
 
-          <li v-if="true" class="nav-item">
-            <router-link to="/admin" class="nav-link">Admin Board</router-link>
+          <li v-if="showAdminBoard" class="nav-item">
+            <router-link to="/admin" class="nav-link">공지사항 Board</router-link>
           </li>
           <!-- menu #7 끝 -->
           <li class="nav-item">

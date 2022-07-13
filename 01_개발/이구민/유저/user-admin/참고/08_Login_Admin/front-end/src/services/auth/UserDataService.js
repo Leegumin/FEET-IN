@@ -1,6 +1,6 @@
-import http from "@/http-auth";
+import http from "../../http-auth";
 // import axios from 'axios';
-import authHeader from '@/services/auth/AuthHeader';
+import authHeader from './AuthHeader';
 
 // const API_URL = 'http://localhost:9000/api/test/';
 

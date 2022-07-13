@@ -47,100 +47,93 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
-    // 로그인 메소드
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid
-                                              @RequestBody
-                                              LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        //  사용자 이름, 비밀번호 인증
+//  사용자 이름, 비밀번호 인증
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-        //  SecurityContext 를 사용하여 업데이트 Authentication
+//  SecurityContext 를 사용하여 업데이트 Authentication
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        //  JWT 토큰 생성
+//  JWT 토큰 생성
         String jwt = jwtUtils.generateJwtToken(authentication);
 
-        //  유저 상세 정보( UserDetails ) 가져오기
+//  유저 상세 정보( UserDetails ) 가져오기
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        //  응답 포함 JWT 및 UwerDetails 데이터
-        List<String> role = userDetails.getAuthorities()
-                                       .stream()
-                                       .map(item -> item.getAuthority())
-                                       .collect(Collectors.toList());
+//  응답 포함 JWT 및 UwerDetails 데이터
+        List<String> role = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
 
-        //    테스트
-        /*roles.add("ROLE_USER");*/
+//    테스트
+//    roles.add("ROLE_USER");
 
 
         logger.info("loginRequest authenticateUser {} ", role);
 
-        return ResponseEntity.ok(
-                new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getName(),
-                                userDetails.getAddress(), userDetails.getEmail(), role, userDetails.getBirth(),
-                                userDetails.getPhone(), userDetails.getDeleteYn(), userDetails.getInsertTime(),
-                                userDetails.getUpdateTime(), userDetails.getDeleteTime()));
+        return ResponseEntity.ok(new JwtResponse(jwt,
+                userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                role));
     }
 
-    // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid
-                                          @RequestBody
-                                          SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 
         logger.info("signUpRequest {} ", signUpRequest);
 
-        if (userService.existsByUserName(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+        if (userService.existsByUsername(signUpRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is already taken!"));
         }
 
         if (userService.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email is already in use!"));
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
-                             encoder.encode(signUpRequest.getPassword()), signUpRequest.getName(),
-                             signUpRequest.getBirth(), signUpRequest.getAddress(), signUpRequest.getPhone(),
-                             signUpRequest.getDeleteYn(), signUpRequest.getInsertTime(), signUpRequest.getUpdateTime(),
-                             signUpRequest.getDeleteTime());
+        User user = new User(signUpRequest.getUsername(),
+                signUpRequest.getEmail(),
+                encoder.encode(signUpRequest.getPassword()));
+        logger.info("user : {}", user);
 
 //    Set<String> strRoles = signUpRequest.getRoles();
         String strRoles = signUpRequest.getRole();
 //    Set<Role> roles = new HashSet<>();
         Set<String> roles = new HashSet<>();
 
-        // * 클라이언트에서 strRoles 즉, 요청한 권한이 없을 때
         if (strRoles == null) {
             Role userRole = roleService.findByName(ERole.ROLE_USER)
-                                       .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole.getName().name());
 //      user 객체 저장
             user.setRole(userRole.getName().name());
-        }
-        // * 클라이언트에서 strRoles 즉, 요청한 권한이 있을 때
-        else {
+        } else {
 //      strRoles.forEach(role -> {
             switch (strRoles) {
                 case "ROLE_ADMIN":
                     Role adminRole = roleService.findByName(ERole.ROLE_ADMIN)
-                                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                     roles.add(adminRole.getName().name());
 //      user 객체 저장
                     user.setRole(adminRole.getName().name());
                     break;
-                /*case "ROLE_MODERATOR":
+                case "ROLE_MODERATOR":
                     Role modRole = roleService.findByName(ERole.ROLE_MODERATOR)
-                                              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                     roles.add(modRole.getName().name());
 //      user 객체 저장
                     user.setRole(modRole.getName().name());
-                    break;*/
+                    break;
                 default:
                     Role userRole = roleService.findByName(ERole.ROLE_USER)
-                                               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                     roles.add(userRole.getName().name());
                     //      user 객체 저장
                     user.setRole(userRole.getName().name());

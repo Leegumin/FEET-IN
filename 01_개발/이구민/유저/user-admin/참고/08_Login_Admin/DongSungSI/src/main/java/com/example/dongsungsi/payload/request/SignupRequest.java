@@ -12,58 +12,21 @@ import java.util.Set;
 @Setter
 @Getter
 @ToString
-// *스프링에서 요청이 온 데이터 유효성 검사돌림
 public class SignupRequest {
+  @NotBlank
+  @Size(min = 3, max = 20)
+  private String username;
 
-    //  사용자 아이디
-    @NotBlank
-    @Size(max = 20)
-    private String username;
+  @NotBlank
+  @Size(max = 50)
+  @Email
+  private String email;
 
-    //  비밀번호
-    @NotBlank
-    @Size(max = 120)
-    private String password;
+//  private Set<String> roles;
+  private String role;
 
-    // 이름
-    @NotBlank
-    @Size(max = 50)
-    private String name;
-
-    // 생일
-    @Size(max = 50)
-    private String birth;
-
-    //  이메일
-    @NotBlank
-    @Size(max = 50)
-    @Email
-    private String email;
-
-    // 주소
-    @NotBlank
-    @Size(max = 120)
-    private String address;
-
-    // 핸드폰번호
-    @NotBlank
-    @Size(max = 20)
-    private String phone;
-
-    // 탈퇴여부
-    private String deleteYn;
-
-    // 가입일자
-    private String insertTime;
-
-    // 회원정보수정 일자
-    private String updateTime;
-
-    // 회원 탈퇴 일자
-    private String deleteTime;
-
-    //  private Set<String> roles;
-    private String role;
-
+  @NotBlank
+  @Size(min = 6, max = 40)
+  private String password;
 
 }

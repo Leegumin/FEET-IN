@@ -9,9 +9,8 @@ import lombok.ToString;
 @ToString
 public class Role {
 
-    // 권한 번호
-    private Integer id;
-    // 권한 이름
-    private ERole   name;
+  private Integer id;
+
+  private ERole name;
 
 }

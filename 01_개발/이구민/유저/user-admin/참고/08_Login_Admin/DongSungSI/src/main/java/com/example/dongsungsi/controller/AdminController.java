@@ -16,19 +16,19 @@ public class AdminController {
     return "Public Content.";
   }
 
-/*//  사용자용 ROLE_USER 또는 ROLE_MODERATOR 또는 ROLE_ADMIN
+//  사용자용 ROLE_USER 또는 ROLE_MODERATOR 또는 ROLE_ADMIN
   @GetMapping("/user")
   @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
   public String userAccess() {
     return "User Content.";
-  }*/
+  }
 
-/*//  ROLE_MODERATOR
+//  ROLE_MODERATOR
   @GetMapping("/mod")
   @PreAuthorize("hasRole('MODERATOR')")
   public String moderatorAccess() {
     return "Moderator Board.";
-  }*/
+  }
 
 //  ROLE_ADMIN
   @GetMapping("/admin")

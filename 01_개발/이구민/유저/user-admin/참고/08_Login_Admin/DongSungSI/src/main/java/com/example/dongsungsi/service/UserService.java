@@ -16,9 +16,9 @@ import java.util.Optional;
  * 2022/05/23         kangtaegyung          최초 생성
  */
 public interface UserService {
-    Optional<User> findByUserName(String username);
+    Optional<User> findByUsername(String username);
 
-    Boolean existsByUserName(String username);
+    Boolean existsByUsername(String username);
 
     Boolean existsByEmail(String email);
 

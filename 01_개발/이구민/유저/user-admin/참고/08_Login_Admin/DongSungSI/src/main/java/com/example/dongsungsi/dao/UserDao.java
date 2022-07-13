@@ -18,16 +18,11 @@ import java.util.Optional;
  */
 @Mapper
 public interface UserDao {
-    
-    // UserName로 찾기
-    Optional<User> findByUserName(String username);
+    Optional<User> findByUsername(String username);
 
-    // 존재하는 유저 UserName 찾기
-    int existsByUserName(String username);
+    int existsByUsername(String username);
 
-    // 존재하는 Email 찾기
     int existsByEmail(String email);
 
-    // 회원가입
     int insertUser(User user);
 }

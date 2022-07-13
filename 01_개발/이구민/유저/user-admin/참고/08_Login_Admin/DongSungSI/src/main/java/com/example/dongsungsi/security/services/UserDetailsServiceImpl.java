@@ -1,6 +1,8 @@
 package com.example.dongsungsi.security.services;
 
 import com.example.dongsungsi.dao.UserDao;
+import com.example.dongsungsi.model.ERole;
+import com.example.dongsungsi.model.Role;
 import com.example.dongsungsi.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   @Override
   @Transactional
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = userDao.findByUserName(username)
+    User user = userDao.findByUsername(username)
         .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
 //  응답 포함 JWT 및 UwerDetails 데이터
