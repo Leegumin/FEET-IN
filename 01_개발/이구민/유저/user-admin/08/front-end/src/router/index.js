@@ -84,6 +84,11 @@ const routes = [
         name: 'findid',
         component: () => import('@/components/log/FindID')
       },
+      {
+        path: '/findpassword',
+        name: 'findpassword',
+        component: () => import('@/components/log/FindPassword')
+      },
     ]
   },
 

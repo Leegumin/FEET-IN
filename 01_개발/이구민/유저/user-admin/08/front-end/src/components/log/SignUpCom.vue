@@ -60,6 +60,7 @@
                              data-vv-as = "Password"
                              name = "password"
                              ref = "password"
+                             maxlength="12"
                       />
                       <label v-if = "!(errors.has('password') && submitted)"
                              class = "form-label"
@@ -79,7 +80,6 @@
                              id = "floatingInputRepeatPassword"
                              class = "form-control form-control-lg"
                              placeholder = "Repeat Password"
-                             v-model = "confirmPassword"
                              v-validate = "'required|confirmed:password'"
                              data-vv-as = "Repeat Password"
                              name = "confirmPassword"

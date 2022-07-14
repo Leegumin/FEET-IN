@@ -71,6 +71,9 @@
                     <p class = "small mb-5 pb-lg-2"><a class = "text-white-50"
                                                        href = "/findid"
                     >Forgot ID?</a></p>
+                    <p class = "small mb-5 pb-lg-2"><a class = "text-white-50"
+                                                       href = "/findpassword"
+                    >Forgot Password?</a></p>
 
                     <div class = "form-group">
                       <button class = "btn btn-outline-light btn-lg px-5 login-btn"

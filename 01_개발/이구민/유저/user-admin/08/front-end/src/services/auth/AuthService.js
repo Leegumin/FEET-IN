@@ -81,8 +81,17 @@ class AuthService {
   // 아이디 찾기 요청
   findID (user) {
     return http.post(`/user-findid`, {
-      name : user.name,
-      email: user.email,
+      name    : user.name,
+      email   : user.email,
+      username: user.username,
+    })
+  }
+
+  // 패스워드 찾기(변경) 요청
+  findPassword (user) {
+    return http.put(`/user-findpassword`, {
+      username   : user.username,
+      newPassword: user.newPassword,
     })
   }
 

@@ -45,6 +45,12 @@ export const auth = {
     findIDFailure (state) {
       state.status.loggedIn = false
     },
+    findPasswordSuccess (state) {
+      state.status.loggedIn = false
+    }, // 회원가입 실패 메소드
+    findPasswordFailure (state) {
+      state.status.loggedIn = false
+    },
   }, // 비동기 함수들 정의
   // axios 통신 : 서버에서 결과를 언제 보내줄지 모름
   actions: {
@@ -106,6 +112,25 @@ export const auth = {
             // commit(mutations 메소드명)
             // registerFailure(state) 호출 => loggedIn 속성 : false, user 속성 : null
             commit('findIDFailure')
+            // 비동기함수 성공 시 : promise.reject 호출됨
+            return Promise.reject(error)
+          })
+    },
+    findPassword ({ commit }, user) {
+      // axios 서버쪽으로 user 객체를 전송해서 인증 요청
+      return AuthService.findPassword(user)
+        // 성공하면 then으로 결과가 들어옴
+        .then(response => {
+            // commit(mutations 메소드명)
+            // registerSuccess(state) 호출 => loggedIn 속성 : false, user 속성 : null
+            commit('findPasswordSuccess')
+            // 비동기함수 성공 시 : promise.resolve 호출됨
+            return Promise.resolve(response.data)
+          }, // 실패하면 error으로 결과가 들어옴
+          error => {
+            // commit(mutations 메소드명)
+            // registerFailure(state) 호출 => loggedIn 속성 : false, user 속성 : null
+            commit('findPasswordFailure')
             // 비동기함수 성공 시 : promise.reject 호출됨
             return Promise.reject(error)
           })
