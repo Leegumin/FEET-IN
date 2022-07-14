@@ -53,6 +53,12 @@
               <li><a class="dropdown-item" href="/admin-page">상품 관리</a></li>
             </ul>
           </li>
+          <li class="nav-item dropdown outer-list">
+            <router-link to="/adminboard">ADMIN Board</router-link>
+          </li>
+          <li class="nav-item dropdown outer-list">
+            <router-link to="/userboard">user Board</router-link>
+          </li>
         </ul>
         <form class="d-flex nav-form">
           <input class="search form-control me-1" type="search" placeholder="Search" aria-label="Search">

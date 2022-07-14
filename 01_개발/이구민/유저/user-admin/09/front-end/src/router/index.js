@@ -96,6 +96,7 @@ const routes = [
         name     : 'add-review',
         component: () => import('@/components/review/AddReview'),
       },
+
     ],
   },
   // * navbar + footer 없는 것
@@ -113,6 +114,16 @@ const routes = [
         path     : '/signup',
         name     : '',
         component: () => import('@/components/log/SignUpCom'),
+      },
+      {
+        path     : '/adminboard',
+        name     : 'adminboard',
+        component: () => import('@/views/BoardAdmin'),
+      },
+      {
+        path     : '/userboard',
+        name     : 'userboard',
+        component: () => import('@/views/BoardUser'),
       },
     ],
   },

@@ -9,7 +9,8 @@ export default function authHeader () {
   // 서버페이지 접근할 때 유저가 null 아니고 토큰이 있다면 실행됨
   if (user && user.token) {
     // springBoot로 토큰 전송 시 아래 포맷을 이용
-    return { Authorization: 'Bearer' + user.token }
+    // 'Bearer ' <- 마지막에 띄어쓰기 안해주면 인식못해먹음
+    return { Authorization: 'Bearer ' + user.token };
     // *참고 : node.js 사용시 return { 'x-access-token': user.accessToken };
   }
   // 값이 없다면 빈 객체 전송

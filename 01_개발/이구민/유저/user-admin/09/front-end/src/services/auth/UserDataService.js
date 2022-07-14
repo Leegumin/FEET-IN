@@ -21,7 +21,7 @@ class UserDataService {
 
   // authHeader()권한이 부여된 리소스를 요청할 때 함수 의 도움으로 HTTP 헤더를 추가하여 요청함
   getAdminBoard () {
-    return http.get('/admin', { headers: authHeader() })
+    return http.get('/admin-page', { headers: authHeader() })
   }
 }
 

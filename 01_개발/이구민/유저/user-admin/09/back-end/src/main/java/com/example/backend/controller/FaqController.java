@@ -64,6 +64,7 @@ public class FaqController {
     }
 
     @GetMapping("/faqs")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Map<String, Object>> getAllTitlePage(Criteria criteria){
 
 

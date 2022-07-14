@@ -4,7 +4,7 @@ import authHeader from '@/services/auth/AuthHeader'
 class FaqDataService {
     getAll(params) {
         // http://localhost:8080/customers?page=0&size=3
-        return http.get(`/faqs`,{ params });
+        return http.get(`/faqs`,{ params, headers: authHeader() });
     }
 
     get(id) {
@@ -16,7 +16,7 @@ class FaqDataService {
 
     create(data) {
         console.log(authHeader())
-        return http.post(`/faqs`, data, { headers: authHeader() });
+        return http.post(`/faqs`, data);
     }
 
     update(id, data) {
