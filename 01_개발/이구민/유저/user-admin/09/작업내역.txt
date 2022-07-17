@@ -8,3 +8,5 @@
     implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.0' 추가
 
 2. 메일인증관련 작업 완료 (아이디찾기, 비번찾기)
+
+3. 이미지 두개 불러오기 작업 완료
