@@ -1,0 +1,11 @@
+-----------------부계정 생성
+CREATE USER gumin
+--비밀번호에 반드시 대문자 포함
+IDENTIFIED BY Mingu1234567890
+DEFAULT TABLESPACE DATA
+TEMPORARY TABLESPACE TEMP;
+
+--데이터 제한 풀어줌
+ALTER USER gumin QUOTA UNLIMITED ON "DATA";
+--권한 설정
+GRANT CONNECT, RESOURCE TO gumin;
