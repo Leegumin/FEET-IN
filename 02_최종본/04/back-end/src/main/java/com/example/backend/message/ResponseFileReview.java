@@ -22,6 +22,7 @@ public class ResponseFileReview {
     private Integer totalItems;
     private Integer totalPages;
     private String url;
+    private String url2;
     private String type;
     private Integer size;
 

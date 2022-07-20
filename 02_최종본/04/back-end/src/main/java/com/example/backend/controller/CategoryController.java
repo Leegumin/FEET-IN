@@ -26,7 +26,7 @@ import java.util.List;
  * 2022/07/07         bagjongho          최초 생성
  */
 // 기본 보안 주소 허용 : http://localhost:8080
-//@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8080")
 // @RestController : 통신을 json형태로 주고받고 싶을때 사용
 @RestController
 @RequestMapping("/api")

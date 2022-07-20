@@ -1,9 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.ERole;
-import com.example.backend.model.Role;
-import com.example.backend.model.SendEmailDto;
-import com.example.backend.model.User;
+import com.example.backend.model.*;
 import com.example.backend.payload.request.LoginRequest;
 import com.example.backend.payload.request.SignupRequest;
 import com.example.backend.payload.response.JwtResponse;
@@ -13,6 +10,7 @@ import com.example.backend.security.services.UserDetailsImpl;
 import com.example.backend.service.RoleServiceImpl;
 import com.example.backend.service.SendEmailServiceImp;
 import com.example.backend.service.UserServiceImpl;
+import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

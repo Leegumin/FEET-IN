@@ -20,22 +20,12 @@ import lombok.ToString;
 @ToString
 public class Order {
     private Long id;
-    private int productId;
-    private int userId;
-    private int finalPrice;
-    private int shoseSize;
-    private int quantity;
+    private Long productId;
+    private Long finalPrice;
+    private Long shoseSize;
+    private Long quantity;
     private String orderTime;
     private String orderName;
     private String address;
     private String tel;
-
-    // product
-    private String title;
-    private String model;
-    private String price;
-    private String discount;
-    private String name;
-    private String type;
-    private byte[] data;
 }

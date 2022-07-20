@@ -25,6 +25,7 @@ public class FileDB {
   private String type;
 //  BLOB 데이터형으로 저장
   private byte[] data;
+  private byte[] data2;
 
 //  todo: String title, String content,
   public FileDB(Long id, String name, String title, String content, String writer, long starNum, String type, byte[] data) {

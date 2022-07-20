@@ -19,16 +19,10 @@ public class ResponseOrder {
     private String address;
     private String tel;
 
-    // 페이징
-    private Integer page;
-    private Integer totalItems;
-    private Integer totalPages;
-
     // product
     private String title;
     private String model;
     private String price;
-    private String discount;
     private String url;
     private String type;
     private Integer size;

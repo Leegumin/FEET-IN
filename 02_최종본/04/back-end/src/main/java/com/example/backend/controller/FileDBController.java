@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-//@CrossOrigin("http://localhost:8080")
+@CrossOrigin("http://localhost:8080")
 @RequestMapping("/api")
 public class FileDBController {
 
@@ -71,6 +71,11 @@ public class FileDBController {
                     .path("/api/files/")
                     .path(String.valueOf(dbFile.getReviewId()))
                     .toUriString();
+            String fileDownloadUri2 = ServletUriComponentsBuilder
+                    .fromCurrentContextPath()
+                    .path("/api/files2/")
+                    .path(String.valueOf(dbFile.getReviewId()))
+                    .toUriString();
 
 //      collect : stream 을 다시 다른 자료형으로 변환
 //        아래는 stream => List 변환
@@ -87,6 +92,7 @@ public class FileDBController {
                     criteria.getTotalItems(),
                     criteria.getTotalPages(),
                     fileDownloadUri,
+                    fileDownloadUri2,
                     dbFile.getType(),
                     dbFile.getData().length);
         }).collect(Collectors.toList());
@@ -106,38 +112,14 @@ public class FileDBController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());
     }
-//
-    @GetMapping("/files/")
-    public ResponseEntity<List<ResponseFileReview>> findByProduct(ReviewCriteria criteria) {
-        logger.info(" criteria.id {} : ", criteria.getId());
+    @GetMapping("/files2/{id}")
+    public ResponseEntity<byte[]> getFile2(@PathVariable long id) {
+        FileDB fileDB = fileDBService.getFile(id);
 
-        List<ResponseFileReview> files = fileDBService.findByProduct(criteria).map(dbFile -> {
-            String fileDownloadUri = ServletUriComponentsBuilder
-                    .fromCurrentContextPath()
-                    .path("/api/files/")
-                    .path(String.valueOf(dbFile.getReviewId()))
-                    .toUriString();
-
-//      collect : stream 을 다시 다른 자료형으로 변환
-//        아래는 stream => List 변환
-            return new ResponseFileReview(
-                    dbFile.getId(),
-                    dbFile.getReviewId(),
-                    dbFile.getName(),
-                    dbFile.getTitle(),
-                    dbFile.getContent(),
-                    dbFile.getWriter(),
-                    dbFile.getStarNum(),
-                    dbFile.getInsertTime(),
-                    criteria.getPage(),
-                    criteria.getTotalItems(),
-                    criteria.getTotalPages(),
-                    fileDownloadUri,
-                    dbFile.getType(),
-                    dbFile.getData().length);
-        }).collect(Collectors.toList());
-
-        return ResponseEntity.status(HttpStatus.OK).body(files);
+        return ResponseEntity.ok()
+//           Todo : attachment: => attachment;
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+                .body(fileDB.getData2());
     }
 
 //    추가

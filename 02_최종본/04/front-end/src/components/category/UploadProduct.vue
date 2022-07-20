@@ -221,7 +221,21 @@ export default {
       pageSizes: [9],
     };
   },
+  computed: {
+    loggedIn () {
+      // 공유저장소의 user객체에 속성인 loggedIn값을 가져옴
+      return this.$store.state.auth.status.loggedIn
+    },
+    currentUser () {
+      return this.$store.state.auth.user
+    },
+  },
   methods: {
+    roleCheck () {
+      if (!this.currentUser || !this.currentUser.roles.includes('ROLE_ADMIN')) {
+        this.$router.push('/')
+      }
+    },
     // Todo : getRequestParams 추가
     getRequestParams(searchTitle, page, pageSize) {
       let params = {};
@@ -341,6 +355,7 @@ export default {
     // springboot 서버에 이미지파일 요청
     this.retrieveProduct();
     addProduct();
+    this.roleCheck()
   },
 };
 </script>

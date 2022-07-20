@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-//@CrossOrigin("http://localhost:8080")
+@CrossOrigin("http://localhost:8080")
 @RequestMapping("/api")
 public class ProductController {
 

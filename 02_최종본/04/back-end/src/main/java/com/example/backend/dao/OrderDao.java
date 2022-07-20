@@ -1,20 +1,31 @@
 package com.example.backend.dao;
 
 import com.example.backend.model.Order;
-import com.example.backend.paging.OrderCriteria;
+import com.example.backend.paging.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface OrderDao {
 
-	List<Order> findMyOrder(OrderCriteria orderCriteria);
 
-	Order getOrderDetail(Long id);
+//	Todo : 2개수정(findByTitleContaining, findAll) , 1개 추가(selectTotalCount)
+	public List<Order> findAll(Criteria criteria);
 
-	int selectTotalCount(int userId);
+//	제목에 따른 데이터 건수를 세는 메소드
+	int selectTotalCount(String orderName);
+
+	public Optional<Order> findById(Long id);
+
+	public int insertOrder(Order order);
+
+	public int updateOrder(Order order);
+
 
 	public int deleteById(Long id);
+
+	public int deleteAll();
 
 }

@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  * 2022-06-07         ds          최초 생성
  */
 @Controller
-//@CrossOrigin("http://localhost:8080")
+@CrossOrigin("http://localhost:8080")
 @RequestMapping("/api")
 public class LikeController {
 
