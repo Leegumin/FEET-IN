@@ -84,7 +84,21 @@ export default {
       pageSizes: [12],
     };
   },
+  computed: {
+    loggedIn () {
+      // 공유저장소의 user객체에 속성인 loggedIn값을 가져옴
+      return this.$store.state.auth.status.loggedIn
+    },
+    currentUser () {
+      return this.$store.state.auth.user
+    },
+  },
   methods: {
+    roleCheck () {
+      if (!this.currentUser || !this.currentUser.roles.includes('ROLE_ADMIN')) {
+        this.$router.push('/')
+      }
+    },
     // todo : getRequestParams 추가
     // 역할 : springboot로 매개변수를 전송
     // 웹 매개변수 : http:/locathost:8080/customers?page=1&pageSize=3
@@ -160,6 +174,7 @@ export default {
     if(this.bflag == 'true') {
       all();
     }
+    this.roleCheck ()
   },
 };
 </script>
