@@ -1,0 +1,30 @@
+.page-link {
+
+    position: relative;
+    display: block;
+    padding: 0.4rem 0.75rem;
+    line-height: 1.25;
+    color: #36363f;
+    border: none;
+    border-radius: 50px;
+    margin: 0 4px;
+}
+
+.page-item.disabled .page-link {
+    color: #36363f;
+    pointer-events: none;
+    cursor: auto;
+    background-color: white;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #36363f;
+}
+
+.page-link:focus, .page-link:hover {
+    color: #36363f;
+    text-decoration: none;
+    background-color: white;
+}

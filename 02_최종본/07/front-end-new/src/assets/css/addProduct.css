@@ -1,0 +1,69 @@
+.add-product-container {
+    width: 800px;
+    margin-top: 20vh!important;
+    /* footer 고정 */
+    /*position: relative;*/
+    padding-bottom: 200px;
+}
+
+footer {
+    /* footer 고정 */
+    width:100%;
+    position:absolute;
+}
+
+#img-upload {
+    height: 31px!important;
+    border-radius: 3px;
+    border: 1px solid #d6d6dc;
+    padding-left: 10px;
+    margin-right: 5px;
+}
+
+#img-upload-btn {
+    height: 100px!important;
+}
+
+.add-product-form {
+    height: 40px;
+    border-radius: 8px!important;
+}
+
+#add-product-content {
+    height: 300px;
+    min-height: 300px;
+    max-height: 500px;
+}
+
+input:focus, input:active, button:focus, button:active, textarea:focus, textarea:active, select:focus, select:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.product-btn {
+    width: 110px!important;
+    color: white;
+    background-color: #36363f;
+    padding: 7px 15px 7px 15px;
+    border-radius: 20px;
+    border: 1px solid #36363f;
+    float: right;
+}
+
+.product-btn:disabled {
+    background-color: #36363f;
+    color: white;
+    border: 1px solid #36363f;
+}
+
+.product-btn:hover {
+    background-color: #028DFF;
+    color: white;
+    border: 1px solid #028DFF;
+}
+
+.product-btn:active {
+    background-color: #028DFF;
+    color: white;
+    border: 1px solid #028DFF;
+}

@@ -1,0 +1,206 @@
+/*html, body {*/
+/*    position: relative;*/
+/*    height: 100vh;*/
+/*}*/
+
+/*body {*/
+/*    background: #eee;*/
+/*    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;*/
+/*    font-size: 14px;*/
+/*    color: #000;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+
+.casual-container {
+    margin-top: 79px;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.rec-container {
+    margin-top: 20vh!important;
+    margin-bottom: 20vh!important;
+}
+
+.rec-wrapper {
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.rec-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.rec-img img {
+    width: 220px;
+    height: 220px;
+    margin: 0 3px;
+    cursor: pointer;
+}
+
+.caption p {
+    color: white;
+    margin-left: 15px;
+    line-height: 10px;
+}
+
+#rec-item-title {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.rec-img:hover .caption {
+    opacity: 0.3; /* 설명글이 화면에 보이게 됨 */
+    /*transform: translateY(+200px);  !* 설명글이 위로 200px 이동 *!*/
+    cursor: pointer;
+}
+
+.caption {
+    margin: 0 3px;
+    position: absolute;
+    top: 0px; /* 기준 위치에서 200px 아래로 */
+    width: 220px;
+    height: 220px;
+    padding-top: 20px;
+    background-color: #36363f; /* 반투명한 검정배경 */
+    opacity: 0%; /* 화면에 보이지 않게 */
+    transition: all 0.3s ease-in-out;
+    z-index: 10;
+}
+
+.swiper-container {
+    /*margin-top: 50px;*/
+    min-width: 1400px;
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 300px;
+    max-height: 300px;
+}
+
+.swiper-container-vertical > .swiper-pagination-bullets {
+    top: unset !important;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+}
+
+.swiper-container-vertical > .swiper-pagination-bullets .swiper-pagination-bullet {
+    display: inline-block !important;
+    /*margin: 6px 2px !important;*/
+}
+
+.casual-list-container {
+    margin-top:10vh!important;
+}
+
+.casual-title {
+    margin-bottom: 100px;
+}
+
+.casual-title h2 {
+    font-size: 45px;
+    /*font-weight: 700;*/
+    font-family: 'Kanit', sans-serif;
+    font-weight: 800;
+    font-style: italic;
+}
+
+.casual-title h3 {
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+#rec-title {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 5px 0;
+    color: white;
+    display: block;
+    width: 100%;
+    background-color: #36363f;
+}
+
+/* * 컬러버튼 * */
+.collection-button2 {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 25px;
+    font-size: 8px;
+    text-align: center;
+    border: none;
+}
+
+.collection-button2:focus {
+    outline: #e3e3e8 solid 3px!important;
+}
+
+.collection-button2:nth-child(1) {
+    border: 1px solid #9e9eab;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" stroke="gray" /></svg>');
+}
+
+.collection-button2:nth-child(2) {
+    background-color: #b4b4b4;
+    border: 1px solid #b4b4b4;
+}
+
+.collection-button2:nth-child(3) {
+    background-color: #c52525;
+    border: 1px solid #c52525;
+}
+
+.collection-button2:nth-child(4) {
+    background-color: #ffb600;
+    border: 1px solid #ffb600;
+}
+
+.collection-button2:nth-child(5) {
+    background-color: #3e9600;
+    border: 1px solid #3e9600;
+}
+
+.collection-button2:nth-child(6) {
+    background-color: #0374d2;
+    border: 1px solid #0374d2;
+}
+
+.collection-button2:nth-child(7) {
+    background-color: white;
+    border: 1px solid #9e9eab;
+}
+
+.collection-button2:nth-child(8) {
+    background-color: #36363f;
+    border: 1px solid #36363f;
+}

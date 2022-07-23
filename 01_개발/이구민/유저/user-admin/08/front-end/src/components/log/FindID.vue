@@ -176,6 +176,8 @@ export default {
                     this.submitted = true
                     this.code = data.code
                     this.id = data.username
+                    console.log(this.code)
+                    console.log(this.id)
 
                     // 입력값 초기화
                     this.user.email = ''
@@ -193,17 +195,14 @@ export default {
       })
     },
     checkCode () {
-      this.$validator.validate().then(isValid => {
-        if (isValid) {
-          if (this.code === this.codeCheck) {
-            alert('찾은 아이디 : ' + this.id)
-            this.$router.push('/login')
-          }
-          else {
-            alert('코드가 일치하지 않습니다!')
-          }
-        }
-      })
+      alert("실행실행")
+      if (this.code === this.codeCheck) {
+        alert('찾은 아이디 : ' + this.id)
+        this.$router.push('/login')
+      }
+      else {
+        alert('코드가 일치하지 않습니다!')
+      }
     },
   },
 }
