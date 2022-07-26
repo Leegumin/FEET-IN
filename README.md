@@ -1,7 +1,7 @@
 # 프로젝트명 : FEET’ IN ( 기간 : 2022.06.21. ~ 2022.07.21. (1개월) )
 팀프로젝트 이구민, 강수정, 김주영, 김종호
 학원 강의로 배운 내용들을 최대한 활용해보기 위해 신발 쇼핑몰 사이트를 제작했음
-  초기 시작 URL http://localhost:8080/
+<br>초기 시작 URL http://localhost:8080/
 
 ## _개발환경_
 Window10, jdk 1.8, Visual Studio Code, IntelliJ IDEA
