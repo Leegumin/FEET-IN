@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.example.backend.dao.UserDao">
+
+    <!--id(고유키)로 유저 찾기-->
+    <select id = "findById"
+            parameterType = "String"
+            resultType = "User">
+        SELECT ID
+             , EMAIL
+             , PASSWORD
+             , USERNAME
+             , ROLE
+             , NAME
+             , ADDRESS
+             , PHONE
+             , DELETE_YN
+             , INSERT_TIME
+             , UPDATE_TIME
+             , DELETE_TIME
+        FROM TB_USER
+        WHERE ID = #{id}
+          AND DELETE_YN = 'N'
+    </select>
+
+    <!--Username(로그인용 유저 id)로 유저 찾기-->
+    <select id = "findByUserName"
+            parameterType = "String"
+            resultType = "User">
+        SELECT ID
+             , EMAIL
+             , PASSWORD
+             , USERNAME
+             , ROLE
+             , NAME
+             , ADDRESS
+             , PHONE
+             , DELETE_YN
+             , INSERT_TIME
+             , UPDATE_TIME
+             , DELETE_TIME
+        FROM TB_USER
+        WHERE USERNAME = #{username}
+          AND DELETE_YN = 'N'
+    </select>
+
+    <!--이미 존재하는 username(로그인용 id) 찾기-->
+    <select id = "existsByUserName"
+            parameterType = "String"
+            resultType = "int">
+        SELECT COUNT(USERNAME)
+        FROM TB_USER
+        WHERE USERNAME = #{username}
+          AND DELETE_YN = 'N'
+
+    </select>
+
+    <!--이미 존재하는 useremail 찾기-->
+    <select id = "existsByEmail"
+            parameterType = "String"
+            resultType = "int">
+        SELECT COUNT(EMAIL)
+        FROM TB_USER
+        WHERE EMAIL = #{email}
+          AND DELETE_YN = 'N'
+
+    </select>
+
+    <!--회원가입-->
+    <insert id = "insertUser"
+            parameterType = "User">
+        INSERT INTO TB_USER( ID
+                           , EMAIL
+                           , PASSWORD
+                           , USERNAME
+                           , ROLE
+                           , NAME
+                           , ADDRESS
+                           , PHONE
+                           , INSERT_TIME)
+        VALUES ( SQ_USER.NEXTVAL
+               , #{email}
+               , #{password}
+               , #{username}
+               , #{role}
+               , #{name}
+               , #{address}
+               , #{phone}
+               , TO_CHAR(SYSDATE + 9 / 24, 'YYYY-MM-DD HH24:MI:SS'))
+    </insert>
+
+    <!--회원 탈퇴-->
+    <update id = "deleteUser"
+            parameterType = "Long">
+        UPDATE TB_USER
+        SET DELETE_YN   = 'Y'
+          , DELETE_TIME = TO_CHAR(SYSDATE + 9 / 24, 'YYYY-MM-DD HH24:MI:SS')
+        WHERE ID = #{id}
+    </update>
+
+    <!--회원 수정-->
+    <update id = "updateUser"
+            parameterType = "User">
+        UPDATE TB_USER
+        SET EMAIL = #{email}
+          , PASSWORD = #{password}
+          , ADDRESS = #{address}
+          , PHONE = #{phone}
+          , UPDATE_TIME = TO_CHAR(SYSDATE + 9 / 24, 'YYYY-MM-DD HH24:MI:SS')
+        WHERE USERNAME = #{username}
+          AND DELETE_YN = 'N'
+    </update>
+</mapper>
