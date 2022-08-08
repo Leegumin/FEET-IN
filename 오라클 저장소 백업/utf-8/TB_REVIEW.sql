@@ -1,0 +1,5 @@
+--------------------------------------------------------
+--  DDL for Table TB_REVIEW
+--------------------------------------------------------
+
+  CREATE TABLE "TB_REVIEW" ("ID" NUMBER, "REVIEW_ID" NUMBER, "NAME" VARCHAR2(1000), "WRITER" VARCHAR2(100), "CONTENT" VARCHAR2(1000), "TITLE" VARCHAR2(100), "INSERT_TIME" VARCHAR2(255), "UPDATE_TIME" VARCHAR2(255), "DELETE_TIME" VARCHAR2(255), "DELETE_YN" CHAR(1) DEFAULT 'N', "TYPE" VARCHAR2(1000), "DATA" BLOB, "STAR_NUM" NUMBER)
