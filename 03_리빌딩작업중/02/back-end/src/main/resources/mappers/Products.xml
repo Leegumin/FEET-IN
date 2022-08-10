@@ -58,6 +58,7 @@
           AND SALE_YN = #{saleYn}
     </select>
 
+    <!--상품 이름으로 조회-->
     <select id="findByTitleContaining"
             parameterType="com.example.backend.paging.ProductCriteria"
             resultType="com.example.backend.model.Product">
@@ -73,6 +74,7 @@
         WHERE R > #{page} * #{size}
     </select>
 
+    <!--상품 카테고리로 조회-->
     <select id="findByCategory"
             parameterType="com.example.backend.paging.ProductCriteria"
             resultType="com.example.backend.model.Product">
@@ -87,6 +89,7 @@
         WHERE R > #{page} * #{size}
     </select>
 
+    <!--세일 상품 조회-->
     <select id="findBySale"
             parameterType="com.example.backend.paging.ProductCriteria"
             resultType="com.example.backend.model.Product">
@@ -101,6 +104,7 @@
         WHERE R > #{page} * #{size}
     </select>
 
+    <!--최근 추가된 상품 조회-->
     <select id="findNewProduct" resultType="com.example.backend.model.Product">
         SELECT *
         FROM (SELECT ROWNUM R, TT.*
@@ -112,6 +116,7 @@
         WHERE R &lt;= 8
     </select>
 
+    <!--랜덤 상품 조회-->
     <select id="findRandomProduct" resultType="com.example.backend.model.Product">
         SELECT *
         FROM (SELECT *
@@ -121,6 +126,7 @@
           AND ROWNUM &lt;= 4
     </select>
 
+    <!--베스트 상품 조회-->
     <select id="findByBestProduct" parameterType="com.example.backend.paging.ProductCriteria"
             resultType="com.example.backend.model.Product">
         SELECT *
@@ -135,6 +141,7 @@
         WHERE R &lt;= #{rowNum}
     </select>
 
+    <!--랜덤 상품 이미지 조회-->
     <select id="findRandomProductImg" resultType="com.example.backend.model.Product">
         SELECT *
         FROM (SELECT *
@@ -144,6 +151,7 @@
           AND ROWNUM &lt;= 5
     </select>
 
+    <!--상품 등록-->
     <insert id="save" parameterType="com.example.backend.model.Product">
         INSERT INTO TB_PRODUCT (
             ID,
@@ -174,6 +182,7 @@
         )
     </insert>
 
+    <!--상품 삭제-->
     <update id="deleteProduct" parameterType="Long">
         UPDATE TB_PRODUCT
         SET
@@ -183,6 +192,7 @@
             ID = #{id}
     </update>
 
+    <!--상품 수정-->
     <update id="updateProduct"
             parameterType="com.example.backend.model.Product">
         UPDATE TB_PRODUCT
@@ -199,6 +209,7 @@
             ID = #{id}
     </update>
 
+    <!--상품 전체 삭제-->
     <update id="deleteAll">
         UPDATE TB_PRODUCT
         SET DELETE_YN = 'Y',

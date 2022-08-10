@@ -29,17 +29,27 @@ public class ProductController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    // 상품수정
     @PostMapping("/uploadProduct")
     public ResponseEntity<ResponseMessage> uploadFile(
-            @RequestParam("category") String category,
-            @RequestParam("title") String title,
-            @RequestParam("model") String model,
-            @RequestParam("description") String description,
-            @RequestParam("price") long price,
-            @RequestParam("discount") int discount,
-            @RequestParam("percent") int percent,
-            @RequestParam("saleYn") String saleYn,
-            @RequestParam("file") MultipartFile file
+            @RequestParam("category")
+            String category,
+            @RequestParam("title")
+            String title,
+            @RequestParam("model")
+            String model,
+            @RequestParam("description")
+            String description,
+            @RequestParam("price")
+            long price,
+            @RequestParam("discount")
+            int discount,
+            @RequestParam("percent")
+            int percent,
+            @RequestParam("saleYn")
+            String saleYn,
+            @RequestParam("file")
+            MultipartFile file
     ) {
         String message = "";
 
@@ -47,16 +57,18 @@ public class ProductController {
         logger.info("file {} : ", file);
 
         try {
-            productService.store(title, model, description,price, category, discount, percent, saleYn, file);
+            productService.store(title, model, description, price, category, discount, percent, saleYn, file);
 
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             message = "Could not upload the file: " + file.getOriginalFilename() + "!";
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
         }
     }
 
+    // 상품 조회
     @GetMapping("/products")
     public ResponseEntity<List<ResponseFile>> getListFiles(ProductCriteria productCriteria) {
         List<ResponseFile> files = productService.findByTitleContaining(productCriteria).map(dbFile -> {
@@ -89,6 +101,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
+    // 상품 카테고리로 조회
     @GetMapping("/category/")
     public ResponseEntity<List<ResponseFile>> getListCategory(ProductCriteria productCriteria) {
         List<ResponseFile> files = productService.findByCategory(productCriteria).map(dbFile -> {
@@ -121,6 +134,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
+    // 세일상품 조회
     @GetMapping("/sales")
     public ResponseEntity<List<ResponseFile>> getListSale(ProductCriteria productCriteria) {
         List<ResponseFile> files = productService.findBySale(productCriteria).map(dbFile -> {
@@ -155,6 +169,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
+    // 최근 상품 조회
     @GetMapping("/new")
     public ResponseEntity<List<ResponseFile>> getNewProduct(ProductCriteria productCriteria) {
         List<ResponseFile> files = productService.findNewProduct(productCriteria).map(dbFile -> {
@@ -187,6 +202,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
+    // 랜덤 상품 조회
     @GetMapping("/random")
     public ResponseEntity<List<ResponseFile>> getRandomProduct(ProductCriteria productCriteria) {
         List<ResponseFile> files = productService.findRandomProduct(productCriteria).map(dbFile -> {
@@ -222,6 +238,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
+    // 랜덤 이미지 조회
     @GetMapping("/randomImg")
     public ResponseEntity<List<ResponseFile>> getRandomProductImg(ProductCriteria productCriteria) {
         List<ResponseFile> files = productService.findRandomProductImg(productCriteria).map(dbFile -> {
@@ -253,6 +270,8 @@ public class ProductController {
 
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
+
+    // 베스트 상품 조회
     @GetMapping("/best")
     public ResponseEntity<List<ResponseFile>> getBestProduct(ProductCriteria productCriteria) {
         List<ResponseFile> files = productService.findByBestProduct(productCriteria).map(dbFile -> {
@@ -286,77 +305,91 @@ public class ProductController {
     }
 
 
+    // 상품 이미지 조회 (이미지 다운로드 주소 리턴)
     @GetMapping("/products/{id}")
-    public ResponseEntity<byte[]> getFile(@PathVariable long id) {
+    public ResponseEntity<byte[]> getFile(
+            @PathVariable
+            long id) {
         Product product = productService.getFile(id);
 
         return ResponseEntity.ok()
 //           Todo : attachment: => attachment;
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + product.getName() + "\"")
-                .body(product.getData());
+                             .header(HttpHeaders.CONTENT_DISPOSITION,
+                                     "attachment; filename=\"" + product.getName() + "\"")
+                             .body(product.getData());
     }
-//
-@GetMapping("/productDetail")
-public ResponseEntity<ResponseFile> findById(@RequestParam("id") long id) {
-    logger.info("request param id : {}", id);
-    Product dbFile = productService.getFile(id);
 
-    String fileDownloadUri = ServletUriComponentsBuilder
-            .fromCurrentContextPath()
-            .path("/api/products/")
-            .path(String.valueOf(dbFile.getId()))
-            .toUriString();
+    // 상품 상세 조회
+    @GetMapping("/productDetail")
+    public ResponseEntity<ResponseFile> findById(
+            @RequestParam("id")
+            long id) {
+        logger.info("request param id : {}", id);
+        Product dbFile = productService.getFile(id);
 
-    ResponseFile resFile =  new ResponseFile(
-            dbFile.getId(),
-            dbFile.getName(),
-            dbFile.getTitle(),
-            dbFile.getModel(),
-            dbFile.getCategory(),
-            dbFile.getDescription(),
-            dbFile.getPrice(),
-            dbFile.getDiscount(),
-            dbFile.getPercent(),
-            dbFile.getSaleYn(),
-            dbFile.getInsertTime(),
-            0,
-            0,
-            0,
-            fileDownloadUri,
-            dbFile.getType(),
-            dbFile.getData().length);
+        String fileDownloadUri = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/api/products/")
+                .path(String.valueOf(dbFile.getId()))
+                .toUriString();
 
-    return ResponseEntity.status(HttpStatus.OK).body(resFile);
-}
+        ResponseFile resFile = new ResponseFile(
+                dbFile.getId(),
+                dbFile.getName(),
+                dbFile.getTitle(),
+                dbFile.getModel(),
+                dbFile.getCategory(),
+                dbFile.getDescription(),
+                dbFile.getPrice(),
+                dbFile.getDiscount(),
+                dbFile.getPercent(),
+                dbFile.getSaleYn(),
+                dbFile.getInsertTime(),
+                0,
+                0,
+                0,
+                fileDownloadUri,
+                dbFile.getType(),
+                dbFile.getData().length);
 
-@PutMapping("/product/{id}")
-public ResponseEntity<Object> updateProduct(
-        @PathVariable("id") Long id,
-        @RequestBody Product product
-) {
-    try {
-        product.setId(id);
-        Product saveProduct = productService.update(product).get();
-
-        return new ResponseEntity<Object>(saveProduct, HttpStatus.OK);
-
-    } catch (Exception ex) {
-        logger.error(ex.getMessage(), ex);
-        return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.OK).body(resFile);
     }
-}
 
-@PutMapping("/products/deletion/{id}")
-public ResponseEntity<HttpStatus> deleteProduct(
-        @PathVariable("id") Long id
-){
+    // 상품 수정
+    @PutMapping("/product/{id}")
+    public ResponseEntity<Object> updateProduct(
+            @PathVariable("id")
+            Long id,
+            @RequestBody
+            Product product
+    ) {
+        try {
+            product.setId(id);
+            Product saveProduct = productService.update(product).get();
+
+            return new ResponseEntity<Object>(saveProduct, HttpStatus.OK);
+
+        }
+        catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // 상품 삭제
+    @PutMapping("/products/deletion/{id}")
+    public ResponseEntity<HttpStatus> deleteProduct(
+            @PathVariable("id")
+            Long id
+    ) {
         logger.info("id", id);
-    try {
-        productService.deleteById(id);
-        return new ResponseEntity<HttpStatus>(HttpStatus.OK);
-    } catch (Exception ex) {
-        logger.error(ex.getMessage(), ex);
-        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
+        try {
+            productService.deleteById(id);
+            return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+        }
+        catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
+        }
     }
-}
 }
