@@ -365,6 +365,7 @@ public class AuthController {
             SimpleEmail email = new SimpleEmail();
             email.setHostName("smtp.naver.com");
             email.setSmtpPort(587);
+            // 아이디, 비밀번호 ( 비밀번호는 매번 새로 생성해서 테스트 후 삭제할 것, 이거 생각없이 올렸다가 스팸용으로 한 번 털림 )
             email.setAuthentication("littlegbear", "K1GLJB4ENX3M");
 
             // 보안연결 SSL, TLS 사용 설정
