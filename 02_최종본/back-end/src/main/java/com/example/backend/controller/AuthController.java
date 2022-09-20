@@ -61,7 +61,7 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@Valid
                                               @RequestBody
                                               LoginRequest loginRequest) {
-
+    logger.info("login이 실행됐음");
         //  사용자 이름, 비밀번호 인증
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
