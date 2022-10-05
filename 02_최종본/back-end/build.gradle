@@ -33,7 +33,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.apache.commons:commons-email:1.5'
 
-
     // 보안설정 모듈 추가
     implementation 'org.springframework.boot:spring-boot-starter-security:2.6.7'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
